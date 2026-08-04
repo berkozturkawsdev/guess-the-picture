@@ -13,6 +13,7 @@ import playWinSound from './utils/playWinSound';
 
 function App() {
   const [language] = useState<"en" | "tr">(getLanguage());
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   const initialLevels = shuffleLevels(levels);
   const [remainingLevels, setRemainingLevels] = useState(initialLevels.slice(1));
@@ -144,6 +145,15 @@ function App() {
 
   return (
     <main className="game-container">
+      <button
+        className="help-button"
+        onClick={() => setIsHelpOpen(true)}
+        aria-label="How to play"
+        type="button"
+      >
+        ?
+      </button>
+
       {isLoading ? (
         <div className="loading-state" role="status" aria-live="polite">
           <div className="loading-spinner" />
@@ -187,6 +197,24 @@ function App() {
           setRemainingLevels(next.remainingLevels);
         }}
       />
+
+      {isHelpOpen && (
+        <div className="help-modal-overlay" onClick={() => setIsHelpOpen(false)}>
+          <div className="help-modal" onClick={(event) => event.stopPropagation()}>
+            <button className="help-modal-close" onClick={() => setIsHelpOpen(false)} type="button">×</button>
+            <h2>How to Play</h2>
+            <p>
+              This game shows you four pictures that hint at a single word.
+              Use the letter buttons to guess the word and complete the puzzle.
+            </p>
+            <ul>
+              <li>Look at the clue images carefully.</li>
+              <li>Pick the letters that form the answer.</li>
+              <li>Complete the word to move to the next puzzle.</li>
+            </ul>
+          </div>
+        </div>
+      )}
     </main>
   )
 }
