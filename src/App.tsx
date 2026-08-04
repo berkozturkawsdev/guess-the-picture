@@ -9,6 +9,7 @@ import generateLetters from './utils/shuffleLetters';
 import { shuffleLevels, getNextLevels } from "./utils/levelManager";
 import { getLanguage } from './utils/getLanguage';
 import { trackEvent } from './utils/analytics';
+import playWinSound from './utils/playWinSound';
 
 function App() {
   const [language] = useState<"en" | "tr">(getLanguage());
@@ -81,6 +82,11 @@ function App() {
 
   const isCorrect = isComplete && guessedWord === word;
   const isWrong = isComplete && guessedWord !== word;
+
+  useEffect(() => {
+    if (!isCorrect) return;
+    playWinSound();
+  }, [isCorrect]);
 
 
   const handleLetterClick = (letter: string, index: number) => {
