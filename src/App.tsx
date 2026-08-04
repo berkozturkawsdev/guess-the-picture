@@ -17,20 +17,8 @@ function App() {
   const [remainingLevels, setRemainingLevels] = useState(initialLevels.slice(1));
 
   const [currentLevel, setCurrentLevel] = useState(initialLevels[0]);
-
-  const [images, setImages] = useState<string[]>([]);;
-
-  useEffect(() => {
-    trackEvent("puzzle_started", {
-      level_id: currentLevel.id,
-      word: currentLevel.words[language]
-    });
-    const path = `/levels/${currentLevel.id}`;
-    setImages([1, 2, 3, 4].map(num => `${path}/${num}.webp`));
-    // Reset guessed letters and available letters when level changes
-    setGuessedLetters(Array.from({ length: currentLevel.words[language].length }, () => ""));
-    setAvailableLetters(generateLetters(currentLevel.words[language], language));
-  }, [currentLevel]);
+  const [images, setImages] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [guessedLetters, setGuessedLetters] = useState<string[]>(
     Array.from({ length: currentLevel.words[language].length }, () => "")
@@ -39,6 +27,52 @@ function App() {
   const [availableLetters, setAvailableLetters] = useState(
     generateLetters(currentLevel.words[language], language)
   );
+
+  useEffect(() => {
+    let cancelled = false;
+
+    setIsLoading(true);
+    setImages([]);
+
+    const minimumLoadingDelay = new Promise<void>((resolve) => {
+      window.setTimeout(resolve, 1000);
+    });
+
+    trackEvent("puzzle_started", {
+      level_id: currentLevel.id,
+      word: currentLevel.words[language]
+    });
+
+    const path = `/levels/${currentLevel.id}`;
+    const imagePaths = [1, 2, 3, 4].map(num => `${path}/${num}.webp`);
+
+    const preloadImages = async () => {
+      await Promise.all([
+        Promise.all(
+          imagePaths.map((src) => new Promise<void>((resolve) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+          }))
+        ),
+        minimumLoadingDelay,
+      ]);
+
+      if (!cancelled) {
+        setImages(imagePaths);
+        setGuessedLetters(Array.from({ length: currentLevel.words[language].length }, () => ""));
+        setAvailableLetters(generateLetters(currentLevel.words[language], language));
+        setIsLoading(false);
+      }
+    };
+
+    void preloadImages();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentLevel, language]);
 
   const word = currentLevel.words[language];
 
@@ -104,42 +138,49 @@ function App() {
 
   return (
     <main className="game-container">
+      {isLoading ? (
+        <div className="loading-state" role="status" aria-live="polite">
+          <div className="loading-spinner" />
+          <p>Loading puzzle...</p>
+        </div>
+      ) : (
+        <>
+          <ImageGrid images={images} />
 
-      <ImageGrid images={images} />
+          <WordDisplay
+            word={word}
+            guessedLetters={guessedLetters}
+            status={
+              isCorrect
+                ? "correct"
+                : isWrong
+                  ? "wrong"
+                  : "normal"
+            }
+            onLetterClick={handleRemoveLetter}
+          />
 
-
-      <WordDisplay
-        word={word}
-        guessedLetters={guessedLetters}
-        status={
-          isCorrect
-            ? "correct"
-            : isWrong
-              ? "wrong"
-              : "normal"
-        }
-        onLetterClick={handleRemoveLetter}
-      />
-
-
-      <LetterGrid
-        letters={availableLetters}
-        onLetterClick={handleLetterClick}
-      />
+          <LetterGrid
+            letters={availableLetters}
+            onLetterClick={handleLetterClick}
+          />
+        </>
+      )}
 
       <WinModal
         isOpen={isCorrect}
         onNext={() => {
-
           trackEvent("next_level_clicked");
           const next = getNextLevels(remainingLevels, levels);
 
+          setIsLoading(true);
+          setImages([]);
+          setGuessedLetters([]);
+          setAvailableLetters([]);
           setCurrentLevel(next.currentLevel);
           setRemainingLevels(next.remainingLevels);
-
         }}
       />
-
     </main>
   )
 }
