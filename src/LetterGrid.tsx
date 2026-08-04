@@ -1,4 +1,3 @@
-import "./LetterGrid.css";
 
 interface LetterGridProps {
     letters: string[];

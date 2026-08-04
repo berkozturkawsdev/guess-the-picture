@@ -1,4 +1,3 @@
-import "./WinModal.css";
 
 interface WinModalProps {
   isOpen: boolean;
