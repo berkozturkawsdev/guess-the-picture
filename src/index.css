@@ -1,0 +1,15 @@
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;      /* fills the screen */
+  background-position: center;
+  background-attachment: fixed; /* optional */
+  font-family: sans-serif;
+}

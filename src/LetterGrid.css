@@ -1,0 +1,60 @@
+.letter-grid {
+  width: min(90vw, 420px);
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+
+  flex-shrink: 1;
+}
+
+.letter-button {
+  aspect-ratio: 1;
+
+  font-size: clamp(14px, 4vw, 22px);
+  font-weight: 800;
+
+  border-radius: 10px;
+  border: 2px solid #d6d6d6;
+
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #dcdcdc
+  );
+
+  color: #333;
+
+  cursor: pointer;
+
+  /* 3D depth */
+  box-shadow:
+    0 5px 0 #b5b5b5,
+    0 8px 12px rgba(0, 0, 0, 0.25);
+
+  transition: 
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
+}
+
+.letter-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 0 #b5b5b5,
+    0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.letter-button:active {
+  transform: translateY(4px);
+
+  box-shadow:
+    0 1px 0 #b5b5b5,
+    0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.letter-button:disabled {
+  opacity: 0.15;
+  cursor: default;
+  box-shadow: none;
+}

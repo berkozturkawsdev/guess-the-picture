@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "words": {
+      "en": "APPLE",
+      "tr": "ELMA"
+    }
+  },
+  {
+    "id": 2,
+    "words": {
+      "en": "DOG",
+      "tr": "KÖPEK"
+    }
+  },
+  {
+    "id": 3,
+    "words": {
+      "en": "CAR",
+      "tr": "ARABA"
+    }
+  },
+  {
+    "id": 4,
+    "words": {
+      "en": "SUN",
+      "tr": "GÜNEŞ"
+    }
+  },
+  {
+    "id": 5,
+    "words": {
+      "en": "TREE",
+      "tr": "AĞAÇ"
+    }
+  },
+  {
+    "id": 6,
+    "words": {
+      "en": "WATER",
+      "tr": "SU"
+    }
+  },
+  {
+    "id": 7,
+    "words": {
+      "en": "FIRE",
+      "tr": "ATEŞ"
+    }
+  },
+  {
+    "id": 8,
+    "words": {
+      "en": "MOON",
+      "tr": "AY"
+    }
+  },
+  {
+    "id": 9,
+    "words": {
+      "en": "BOOK",
+      "tr": "KİTAP"
+    }
+  },
+  {
+    "id": 10,
+    "words": {
+      "en": "KEY",
+      "tr": "ANAHTAR"
+    }
+  },
+  {
+    "id": 11,
+    "words": {
+      "en": "MUSIC",
+      "tr": "MÜZİK"
+    }
+  },
+  {
+    "id": 12,
+    "words": {
+      "en": "HOUSE",
+      "tr": "EV"
+    }
+  },
+  {
+    "id": 13,
+    "words": {
+      "en": "FLOWER",
+      "tr": "ÇİÇEK"
+    }
+  },
+  {
+    "id": 14,
+    "words": {
+      "en": "STAR",
+      "tr": "YILDIZ"
+    }
+  },
+  {
+    "id": 15,
+    "words": {
+      "en": "MOUNTAIN",
+      "tr": "DAĞ"
+    }
+  },
+  {
+    "id": 16,
+    "words": {
+      "en": "FISH",
+      "tr": "BALIK"
+    }
+  },
+  {
+    "id": 17,
+    "words": {
+      "en": "BREAD",
+      "tr": "EKMEK"
+    }
+  },
+  {
+    "id": 18,
+    "words": {
+      "en": "RAIN",
+      "tr": "YAĞMUR"
+    }
+  },
+  {
+    "id": 19,
+    "words": {
+      "en": "CLOCK",
+      "tr": "SAAT"
+    }
+  },
+  {
+    "id": 20,
+    "words": {
+      "en": "BRIDGE",
+      "tr": "KÖPRÜ"
+    }
+  }
+]
