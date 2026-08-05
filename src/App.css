@@ -92,6 +92,100 @@ body {
   text-align: center;
 }
 
+.landing-page {
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at top, #1e3a8a, var(--bg) 45%);
+}
+
+.hero-card {
+  width: min(92vw, 680px);
+  padding: clamp(24px, 5vw, 40px);
+  border-radius: 28px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  text-align: center;
+  color: var(--text);
+}
+
+.hero-badge {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(96, 165, 250, 0.2);
+  color: #bfdbfe;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-card h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.hero-copy {
+  margin: 0 auto 20px;
+  max-width: 620px;
+  font-size: clamp(1rem, 2.3vw, 1.1rem);
+  line-height: 1.7;
+  color: rgba(248, 250, 252, 0.9);
+}
+
+.play-button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+}
+
+.play-button:hover {
+  transform: translateY(-1px);
+}
+
+.hero-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.hero-highlights div {
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-highlights strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.hero-highlights span {
+  font-size: 0.9rem;
+  color: rgba(248, 250, 252, 0.82);
+}
+
+@media (max-width: 700px) {
+  .hero-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
 .help-button {
   position: absolute;
   top: 16px;
@@ -162,7 +256,39 @@ body {
 
 .help-modal ul {
   padding-left: 18px;
-  margin-bottom: 0;
+  margin-bottom: 12px;
+}
+
+.help-about {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.help-about h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.help-about p {
+  margin: 0 0 8px;
+  opacity: 0.9;
+}
+
+.help-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.help-links a {
+  color: #dbeafe;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.help-links a:hover {
+  text-decoration: underline;
 }
 
 .loading-spinner {

@@ -14,6 +14,7 @@ import playWinSound from './utils/playWinSound';
 function App() {
   const [language] = useState<"en" | "tr">(getLanguage());
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const initialLevels = shuffleLevels(levels);
   const [remainingLevels, setRemainingLevels] = useState(initialLevels.slice(1));
@@ -31,6 +32,8 @@ function App() {
   );
 
   useEffect(() => {
+    if (!hasStarted) return;
+
     let cancelled = false;
 
     setIsLoading(true);
@@ -74,7 +77,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [currentLevel, language]);
+  }, [currentLevel, language, hasStarted]);
 
   const word = currentLevel.words[language];
 
@@ -142,6 +145,40 @@ function App() {
     });
   };
 
+
+  if (!hasStarted) {
+    return (
+      <main className="landing-page">
+        <section className="hero-card">
+          <p className="hero-badge">Free Picture Word Puzzle</p>
+          <h1>Guess the Picture</h1>
+          <p className="hero-copy">
+            Play an addictive word puzzle game where four picture clues lead to one hidden word.
+            Test your vocabulary, sharpen your observation skills, and enjoy a fun daily challenge.
+          </p>
+
+          <button className="play-button" type="button" onClick={() => setHasStarted(true)}>
+            Play Now
+          </button>
+
+          <div className="hero-highlights">
+            <div>
+              <strong>4 clue images</strong>
+              <span>Find the shared word</span>
+            </div>
+            <div>
+              <strong>Fast and fun</strong>
+              <span>Great for quick brain breaks</span>
+            </div>
+            <div>
+              <strong>Free to play</strong>
+              <span>Enjoy endless word guessing fun</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="game-container">
@@ -212,11 +249,21 @@ function App() {
               <li>Pick the letters that form the answer.</li>
               <li>Complete the word to move to the next puzzle.</li>
             </ul>
+
+            <div className="help-about">
+              <h3>About</h3>
+              <p>Built by Berk Öztürk.</p>
+              <div className="help-links">
+                <a href="https://github.com/berkozturkawsdev" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/berk-ozturk-56a764a8/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://berkozturk.bozapps.com" target="_blank" rel="noreferrer">Personal Website</a>
+              </div>
+            </div>
           </div>
         </div>
       )}
     </main>
-  )
+  );
 }
 
 export default App
