@@ -104,21 +104,33 @@ body {
 }
 
 .hero-card {
-  width: min(92vw, 680px);
-  padding: clamp(24px, 5vw, 40px);
-  border-radius: 28px;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(12px);
-  text-align: center;
+  width: min(94vw, 860px);
+  max-height: min(92dvh, 720px);
+  overflow: hidden;
+  padding: clamp(12px, 2.6vw, 24px);
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
   color: var(--text);
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 32px);
+  text-align: left;
+}
+
+.hero-text {
+  flex: 1;
 }
 
 .hero-badge {
   display: inline-block;
-  margin: 0 0 10px;
-  padding: 6px 10px;
+  margin: 0 0 8px;
+  padding: 5px 8px;
   border-radius: 999px;
   background: rgba(96, 165, 250, 0.2);
   color: #bfdbfe;
@@ -128,24 +140,35 @@ body {
   text-transform: uppercase;
 }
 
+.hero-image {
+  display: block;
+  width: min(100%, 320px);
+  max-width: 320px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: contain;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
 .hero-card h1 {
-  margin: 0 0 12px;
-  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0 0 8px;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
 }
 
 .hero-copy {
-  margin: 0 auto 20px;
+  margin: 0 0 14px;
   max-width: 620px;
-  font-size: clamp(1rem, 2.3vw, 1.1rem);
-  line-height: 1.7;
+  font-size: clamp(0.94rem, 1.8vw, 1rem);
+  line-height: 1.6;
   color: rgba(248, 250, 252, 0.9);
 }
 
 .play-button {
   border: none;
   border-radius: 999px;
-  padding: 12px 24px;
-  font-size: 1rem;
+  padding: 10px 20px;
+  font-size: 0.95rem;
   font-weight: 700;
   color: white;
   background: linear-gradient(135deg, #38bdf8, #2563eb);
@@ -160,13 +183,14 @@ body {
 .hero-highlights {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 24px;
+  gap: 8px;
+  margin-top: 16px;
+  text-align: center;
 }
 
 .hero-highlights div {
-  padding: 12px;
-  border-radius: 16px;
+  padding: 10px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.08);
 }
 
@@ -181,6 +205,16 @@ body {
 }
 
 @media (max-width: 700px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-image {
+    width: min(100%, 220px);
+    max-width: 220px;
+  }
+
   .hero-highlights {
     grid-template-columns: 1fr;
   }

@@ -10,6 +10,7 @@ import { shuffleLevels, getNextLevels } from "./utils/levelManager";
 import { getLanguage } from './utils/getLanguage';
 import { trackEvent } from './utils/analytics';
 import playWinSound from './utils/playWinSound';
+import heroImage from './assets/hero.webp';
 
 function App() {
   const [language] = useState<"en" | "tr">(getLanguage());
@@ -150,16 +151,21 @@ function App() {
     return (
       <main className="landing-page">
         <section className="hero-card">
-          <p className="hero-badge">Free Picture Word Puzzle</p>
-          <h1>Guess the Picture</h1>
-          <p className="hero-copy">
-            Play an addictive word puzzle game where four picture clues lead to one hidden word.
-            Test your vocabulary, sharpen your observation skills, and enjoy a fun daily challenge.
-          </p>
+          <div className="hero-content">
+            <img className="hero-image" src={heroImage} alt="Guess the Picture gameplay preview" />
+            <div className="hero-text">
+              <p className="hero-badge">Free Picture Word Puzzle</p>
+              <h1>Guess the Picture</h1>
+              <p className="hero-copy">
+                Play an addictive word puzzle game where four picture clues lead to one hidden word.
+                Test your vocabulary, sharpen your observation skills, and enjoy a fun daily challenge.
+              </p>
 
-          <button className="play-button" type="button" onClick={() => setHasStarted(true)}>
-            Play Now
-          </button>
+              <button className="play-button" type="button" onClick={() => setHasStarted(true)}>
+                Play Now
+              </button>
+            </div>
+          </div>
 
           <div className="hero-highlights">
             <div>
