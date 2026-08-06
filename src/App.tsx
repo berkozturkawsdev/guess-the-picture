@@ -337,6 +337,7 @@ function App() {
 
       <WinModal
         isOpen={isCorrect}
+        language={language}
         onNext={() => {
           trackEvent("next_level_clicked");
           const next = getNextLevels(remainingLevels, levels);
