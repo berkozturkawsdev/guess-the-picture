@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactCountryFlag from 'react-country-flag';
 import './App.css'
 import ImageGrid from './ImageGrid'
 import LetterGrid from './LetterGrid'
@@ -7,14 +8,15 @@ import levels from "./data/levels.json";
 import WinModal from './WinModal';
 import generateLetters from './utils/shuffleLetters';
 import { shuffleLevels, getNextLevels } from "./utils/levelManager";
-import { getLanguage } from './utils/getLanguage';
+import { getLanguage, setLanguage, type Language } from './utils/getLanguage';
 import { trackEvent } from './utils/analytics';
 import playWinSound from './utils/playWinSound';
 import heroImage from './assets/hero.webp';
 
 function App() {
-  const [language] = useState<"en" | "tr">(getLanguage());
+  const [language, setLanguageState] = useState<Language>(() => getLanguage());
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
   const initialLevels = shuffleLevels(levels);
@@ -31,6 +33,10 @@ function App() {
   const [availableLetters, setAvailableLetters] = useState(
     generateLetters(currentLevel.words[language], language)
   );
+
+  useEffect(() => {
+    setLanguage(language);
+  }, [language]);
 
   useEffect(() => {
     if (!hasStarted) return;
@@ -81,6 +87,59 @@ function App() {
   }, [currentLevel, language, hasStarted]);
 
   const word = currentLevel.words[language];
+  const copy = language === "tr"
+    ? {
+      badge: "Ücretsiz Görsel Kelime Bulmaca",
+      title: "Resme Bak ve Tahmin Et",
+      intro: "Dört görsel ipucuyla tek bir kelimeyi bulduğun ücretsiz bir kelime bulmaca oyunu oyna. Kelime dağarcığını test et, gözlem becerini geliştirmesini ve eğlenceli bir günlük meydan okuma yaşa.",
+      playButton: "Başla",
+      highlights: [
+        { title: "4 görsel ipucu", text: "Ortak kelimeyi bul" },
+        { title: "Hızlı ve eğlenceli", text: "Kısa beyin egzersizleri için ideal" },
+        { title: "Ücretsiz", text: "Sınırsız kelime tahmin eğlencesi" },
+      ],
+      loading: "Bulmaca yükleniyor...",
+      settingsTitle: "Ayarlar",
+      languageLabel: "Dil",
+      english: "İngilizce",
+      turkish: "Türkçe",
+      close: "Kapat",
+      howToPlayTitle: "Nasıl Oynanır",
+      howToPlayBody: "Bu oyunda dört görsel tek bir kelimeye işaret eder. Harf butonlarını kullanarak kelimeyi tahmin et ve bulmacayı tamamla.",
+      howToPlayList: [
+        "Görsel ipuçlarını dikkatlice incele.",
+        "Cevabı oluşturacak harfleri seç.",
+        "Kelimeyi tamamlayarak bir sonraki bulmacaya geç.",
+      ],
+      aboutTitle: "Hakkında",
+      aboutBody: "Berk Öztürk tarafından oluşturuldu.",
+    }
+    : {
+      badge: "Free Picture Word Puzzle",
+      title: "Guess the Picture",
+      intro: "Play an addictive word puzzle game where four picture clues lead to one hidden word. Test your vocabulary, sharpen your observation skills, and enjoy a fun daily challenge.",
+      playButton: "Play Now",
+      highlights: [
+        { title: "4 clue images", text: "Find the shared word" },
+        { title: "Fast and fun", text: "Great for quick brain breaks" },
+        { title: "Free to play", text: "Enjoy endless word guessing fun" },
+      ],
+      loading: "Loading puzzle...",
+      settingsTitle: "Settings",
+      languageLabel: "Language",
+      english: "English",
+      turkish: "Turkish",
+      close: "Close",
+      howToPlayTitle: "How to Play",
+      howToPlayBody: "This game shows you four pictures that hint at a single word. Use the letter buttons to guess the word and complete the puzzle.",
+      howToPlayList: [
+        "Look at the clue images carefully.",
+        "Pick the letters that form the answer.",
+        "Complete the word to move to the next puzzle.",
+      ],
+      aboutTitle: "About",
+      aboutBody: "Built by Berk Öztürk.",
+    };
 
   const isComplete = guessedLetters.every(letter => letter !== "");
   const guessedWord = guessedLetters.join("");
@@ -150,57 +209,107 @@ function App() {
   if (!hasStarted) {
     return (
       <main className="landing-page">
+        <div className="top-actions">
+          <button
+            className="settings-button"
+            onClick={() => setIsSettingsOpen(true)}
+            aria-label="Open settings"
+            type="button"
+          >
+            ⚙
+          </button>
+        </div>
+
         <section className="hero-card">
           <div className="hero-content">
             <img className="hero-image" src={heroImage} alt="Guess the Picture gameplay preview" />
             <div className="hero-text">
-              <p className="hero-badge">Free Picture Word Puzzle</p>
-              <h1>Guess the Picture</h1>
-              <p className="hero-copy">
-                Play an addictive word puzzle game where four picture clues lead to one hidden word.
-                Test your vocabulary, sharpen your observation skills, and enjoy a fun daily challenge.
-              </p>
+              <p className="hero-badge">{copy.badge}</p>
+              <h1>{copy.title}</h1>
+              <p className="hero-copy">{copy.intro}</p>
 
               <button className="play-button" type="button" onClick={() => setHasStarted(true)}>
-                Play Now
+                {copy.playButton}
               </button>
             </div>
           </div>
 
           <div className="hero-highlights">
-            <div>
-              <strong>4 clue images</strong>
-              <span>Find the shared word</span>
-            </div>
-            <div>
-              <strong>Fast and fun</strong>
-              <span>Great for quick brain breaks</span>
-            </div>
-            <div>
-              <strong>Free to play</strong>
-              <span>Enjoy endless word guessing fun</span>
-            </div>
+            {copy.highlights.map((item) => (
+              <div key={item.title}>
+                <strong>{item.title}</strong>
+                <span>{item.text}</span>
+              </div>
+            ))}
           </div>
         </section>
+
+        {isSettingsOpen && (
+          <div className="settings-modal-overlay" onClick={() => setIsSettingsOpen(false)}>
+            <div className="settings-modal" onClick={(event) => event.stopPropagation()}>
+              <button className="settings-modal-close" onClick={() => setIsSettingsOpen(false)} type="button">×</button>
+              <h2>{copy.settingsTitle}</h2>
+              <p className="settings-label">{copy.languageLabel}</p>
+              <div className="settings-options">
+                <button
+                  className={`settings-option ${language === "en" ? "active" : ""}`}
+                  type="button"
+                  onClick={() => {
+                    setLanguageState("en");
+                    setIsSettingsOpen(false);
+                  }}
+                >
+                  <span className="settings-flag" aria-hidden="true">
+                    <ReactCountryFlag countryCode="US" svg />
+                  </span>
+                  {copy.english}
+                </button>
+                <button
+                  className={`settings-option ${language === "tr" ? "active" : ""}`}
+                  type="button"
+                  onClick={() => {
+                    setLanguageState("tr");
+                    setIsSettingsOpen(false);
+                  }}
+                >
+                  <span className="settings-flag" aria-hidden="true">
+                    <ReactCountryFlag countryCode="TR" svg />
+                  </span>
+                  {copy.turkish}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     );
   }
 
   return (
     <main className="game-container">
-      <button
-        className="help-button"
-        onClick={() => setIsHelpOpen(true)}
-        aria-label="How to play"
-        type="button"
-      >
-        ?
-      </button>
+      <div className="top-actions">
+        <button
+          className="settings-button"
+          onClick={() => setIsSettingsOpen(true)}
+          aria-label="Open settings"
+          type="button"
+        >
+          ⚙
+        </button>
+        <button
+          className="help-button"
+          onClick={() => setIsHelpOpen(true)}
+          aria-label="How to play"
+          type="button"
+        >
+          ?
+        </button>
+      </div>
 
       {isLoading ? (
         <div className="loading-state" role="status" aria-live="polite">
           <div className="loading-spinner" />
-          <p>Loading puzzle...</p>
+          <p>{copy.loading}</p>
         </div>
       ) : (
         <>
@@ -245,25 +354,60 @@ function App() {
         <div className="help-modal-overlay" onClick={() => setIsHelpOpen(false)}>
           <div className="help-modal" onClick={(event) => event.stopPropagation()}>
             <button className="help-modal-close" onClick={() => setIsHelpOpen(false)} type="button">×</button>
-            <h2>How to Play</h2>
-            <p>
-              This game shows you four pictures that hint at a single word.
-              Use the letter buttons to guess the word and complete the puzzle.
-            </p>
+            <h2>{copy.howToPlayTitle}</h2>
+            <p>{copy.howToPlayBody}</p>
             <ul>
-              <li>Look at the clue images carefully.</li>
-              <li>Pick the letters that form the answer.</li>
-              <li>Complete the word to move to the next puzzle.</li>
+              {copy.howToPlayList.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
 
             <div className="help-about">
-              <h3>About</h3>
-              <p>Built by Berk Öztürk.</p>
+              <h3>{copy.aboutTitle}</h3>
+              <p>{copy.aboutBody}</p>
               <div className="help-links">
                 <a href="https://github.com/berkozturkawsdev" target="_blank" rel="noreferrer">GitHub</a>
                 <a href="https://www.linkedin.com/in/berk-ozturk-56a764a8/" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a href="https://berkozturk.bozapps.com" target="_blank" rel="noreferrer">Personal Website</a>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isSettingsOpen && (
+        <div className="settings-modal-overlay" onClick={() => setIsSettingsOpen(false)}>
+          <div className="settings-modal" onClick={(event) => event.stopPropagation()}>
+            <button className="settings-modal-close" onClick={() => setIsSettingsOpen(false)} type="button">×</button>
+            <h2>{copy.settingsTitle}</h2>
+            <p className="settings-label">{copy.languageLabel}</p>
+            <div className="settings-options">
+              <button
+                className={`settings-option ${language === "en" ? "active" : ""}`}
+                type="button"
+                onClick={() => {
+                  setLanguageState("en");
+                  setIsSettingsOpen(false);
+                }}
+              >
+                <span className="settings-flag" aria-hidden="true">
+                  <ReactCountryFlag countryCode="US" svg />
+                </span>
+                {copy.english}
+              </button>
+              <button
+                className={`settings-option ${language === "tr" ? "active" : ""}`}
+                type="button"
+                onClick={() => {
+                  setLanguageState("tr");
+                  setIsSettingsOpen(false);
+                }}
+              >
+                <span className="settings-flag" aria-hidden="true">
+                  <ReactCountryFlag countryCode="TR" svg />
+                </span>
+                {copy.turkish}
+              </button>
             </div>
           </div>
         </div>
