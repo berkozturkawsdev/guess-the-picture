@@ -138,5 +138,75 @@
       "en": "BRIDGE",
       "tr": "KÖPRÜ"
     }
+  },
+  {
+    "id": 21,
+    "words": {
+      "en": "BALL",
+      "tr": "TOP"
+    }
+  },
+  {
+    "id": 22,
+    "words": {
+      "en": "COLD",
+      "tr": "SOĞUK"
+    }
+  },
+  {
+    "id": 23,
+    "words": {
+      "en": "HOT",
+      "tr": "SICAK"
+    }
+  },
+  {
+    "id": 24,
+    "words": {
+      "en": "BIG",
+      "tr": "BÜYÜK"
+    }
+  },
+  {
+    "id": 25,
+    "words": {
+      "en": "FAST",
+      "tr": "HIZLI"
+    }
+  },
+  {
+    "id": 26,
+    "words": {
+      "en": "SMALL",
+      "tr": "KÜÇÜK"
+    }
+  },
+  {
+    "id": 27,
+    "words": {
+      "en": "FOOD",
+      "tr": "YEMEK"
+    }
+  },
+  {
+    "id": 28,
+    "words": {
+      "en": "EYE",
+      "tr": "GÖZ"
+    }
+  },
+  {
+    "id": 29,
+    "words": {
+      "en": "LIGHT",
+      "tr": "IŞIK"
+    }
+  },
+  {
+    "id": 30,
+    "words": {
+      "en": "CAMERA",
+      "tr": "KAMERA"
+    }
   }
 ]
