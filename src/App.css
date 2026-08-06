@@ -668,6 +668,29 @@ body {
   animation: fadeIn 0.25s ease;
 }
 
+.score-display {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.12);
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font-size: 24px;
+}
+
+.star {
+  color: rgba(255,255,255,0.28);
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #ffd166;
+}
+
 .win-modal {
   width: min(92vw, 380px);
   max-width: 380px;

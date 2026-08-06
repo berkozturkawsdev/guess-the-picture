@@ -52,7 +52,43 @@
 
 .win-modal p {
   opacity: .8;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+}
+
+.score-display {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.12);
+}
+
+.score-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.star {
+  color: rgba(255,255,255,0.28);
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #ffd166;
+}
+
+.score-value {
+  font-weight: 700;
 }
 
 .next-button {

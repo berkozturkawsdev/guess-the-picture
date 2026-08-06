@@ -25,6 +25,7 @@ function App() {
   const [currentLevel, setCurrentLevel] = useState(initialLevels[0]);
   const [images, setImages] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [roundStars, setRoundStars] = useState(5);
 
   const [guessedLetters, setGuessedLetters] = useState<string[]>(
     Array.from({ length: currentLevel.words[language].length }, () => "")
@@ -45,6 +46,7 @@ function App() {
 
     setIsLoading(true);
     setImages([]);
+    setRoundStars(5);
 
     const minimumLoadingDelay = new Promise<void>((resolve) => {
       window.setTimeout(resolve, 1000);
@@ -154,6 +156,9 @@ function App() {
 
 
   const handleLetterClick = (letter: string, index: number) => {
+    if (!word.includes(letter)) {
+      setRoundStars(prev => Math.max(1, prev - 1));
+    }
 
     // remove from available letters
     setAvailableLetters(prev => {
@@ -338,6 +343,7 @@ function App() {
       <WinModal
         isOpen={isCorrect}
         language={language}
+        stars={roundStars}
         onNext={() => {
           trackEvent("next_level_clicked");
           const next = getNextLevels(remainingLevels, levels);
@@ -346,6 +352,7 @@ function App() {
           setImages([]);
           setGuessedLetters([]);
           setAvailableLetters([]);
+          setRoundStars(5);
           setCurrentLevel(next.currentLevel);
           setRemainingLevels(next.remainingLevels);
         }}
