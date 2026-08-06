@@ -43,6 +43,7 @@ body {
 /* Main game container */
 
 .game-container {
+  position: relative;
   min-height: 100svh;
   min-height: 100dvh;
   width: 100%;
@@ -168,13 +169,25 @@ body {
 .play-button {
   border: none;
   border-radius: 999px;
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  font-weight: 700;
+  padding: 13px 28px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
   color: white;
   background: linear-gradient(135deg, #38bdf8, #2563eb);
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
+  transform: translateY(0);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.play-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.46);
 }
 
 .play-button:hover {
@@ -206,34 +219,85 @@ body {
 }
 
 @media (max-width: 700px) {
+  .landing-page {
+    padding: 14px 12px 24px;
+    align-items: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .hero-card {
+    width: min(100%, 860px);
+    max-height: none;
+    padding: 8px 0 0;
+  }
+
   .hero-content {
     flex-direction: column;
     text-align: center;
+    gap: 10px;
   }
 
   .hero-image {
-    width: min(100%, 220px);
-    max-width: 220px;
+    width: min(100%, 180px);
+    max-width: 180px;
+  }
+
+  .hero-card h1 {
+    font-size: clamp(1.15rem, 4.7vw, 1.55rem);
+  }
+
+  .hero-copy {
+    font-size: 0.84rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+
+  .play-button {
+    padding: 11px 20px;
+    font-size: 0.95rem;
   }
 
   .hero-highlights {
     grid-template-columns: 1fr;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .hero-highlights div {
+    padding: 7px;
+  }
+
+  .hero-highlights strong {
+    font-size: 0.86rem;
+    margin-bottom: 2px;
+  }
+
+  .hero-highlights span {
+    font-size: 0.76rem;
   }
 }
 
 .top-actions {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: 10px;
+  width: auto;
+  max-width: calc(100% - 32px);
   z-index: 20;
 }
 
 .help-button,
 .settings-button {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.16);
@@ -820,6 +884,18 @@ body {
 }
 
 @media (max-width: 480px) {
+  .top-actions {
+    top: 12px;
+    right: 12px;
+    left: auto;
+    width: auto;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 8px;
+    justify-content: end;
+  }
+
   .image-grid {
     gap: 5px;
     padding: 5px;

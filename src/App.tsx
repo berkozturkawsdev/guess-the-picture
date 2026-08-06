@@ -234,6 +234,7 @@ function App() {
               <p className="hero-copy">{copy.intro}</p>
 
               <button className="play-button" type="button" onClick={() => setHasStarted(true)}>
+                <span aria-hidden="true">▶</span>
                 {copy.playButton}
               </button>
             </div>
