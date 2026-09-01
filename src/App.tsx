@@ -12,13 +12,14 @@ import { getLanguage, setLanguage, type Language } from './utils/getLanguage';
 import { trackEvent } from './utils/analytics';
 import playWinSound from './utils/playWinSound';
 import heroImage from './assets/hero.webp';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [language, setLanguageState] = useState<Language>(() => getLanguage());
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
-
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false);
   const initialLevels = shuffleLevels(levels);
   const [remainingLevels, setRemainingLevels] = useState(initialLevels.slice(1));
 
@@ -296,6 +297,14 @@ function App() {
       <div className="top-actions">
         <button
           className="settings-button"
+          onClick={() => setIsExitModalOpen(true)}
+          aria-label="Exit game"
+          type="button"
+        >
+          ✕
+        </button>
+        <button
+          className="settings-button"
           onClick={() => setIsSettingsOpen(true)}
           aria-label="Open settings"
           type="button"
@@ -416,6 +425,47 @@ function App() {
                   <ReactCountryFlag countryCode="TR" svg />
                 </span>
                 {copy.turkish}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isExitModalOpen && (
+        <div
+          className="exit-modal-overlay"
+          onClick={() => setIsExitModalOpen(false)}
+        >
+          <div
+            className="exit-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h2>{language === "tr" ? "Oyundan Çık?" : "Exit Game?"}</h2>
+
+            <p>
+              {language === "tr"
+                ? "Bulmacayı bırakmak istediğinden emin misin?"
+                : "Are you sure you want to stop playing?"}
+            </p>
+
+            <div className="exit-modal-actions">
+              <button
+                className="exit-cancel-button"
+                type="button"
+                onClick={() => setIsExitModalOpen(false)}
+              >
+                {language === "tr" ? "Devam Et" : "Keep Playing"}
+              </button>
+
+              <button
+                className="exit-confirm-button"
+                type="button"
+                onClick={() => {
+                  setIsExitModalOpen(false);
+                  setHasStarted(false);
+                }}
+              >
+                {language === "tr" ? "Çık" : "Exit"}
               </button>
             </div>
           </div>
