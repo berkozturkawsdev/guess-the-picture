@@ -29,7 +29,12 @@ export interface Copy {
         list: string[],
         aboutTitle: string,
         aboutBody: string
-    }
+    },
+    setCompleted: {
+        title: string;
+        message: string;
+        button: string;
+    };
 };
 
 export const getCopy = (language: Language) =>
@@ -89,6 +94,11 @@ export const getCopy = (language: Language) =>
                 aboutTitle: "Hakkında",
                 aboutBody: "Berk Öztürk tarafından oluşturuldu.",
             },
+            setCompleted: {
+                title: "Bulmaca Seti Tamamlandı!",
+                message: "Bu setteki tüm bulmacaları tamamladın.",
+                button: "Bulmaca Setlerine Dön",
+            },
         }
         : {
             badge: "Free Picture Word Puzzle",
@@ -144,5 +154,10 @@ export const getCopy = (language: Language) =>
                 ],
                 aboutTitle: "About",
                 aboutBody: "Built by Berk Öztürk.",
+            },
+            setCompleted: {
+                title: "Puzzle Set Completed!",
+                message: "You've completed all puzzles in this set.",
+                button: "Back to Puzzle Sets",
             },
         };

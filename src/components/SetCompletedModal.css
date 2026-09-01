@@ -1,0 +1,158 @@
+.set-completed-overlay {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(2, 6, 23, 0.82);
+    backdrop-filter: blur(8px);
+
+    z-index: 9999;
+
+    overflow: auto;
+
+    animation: setCompletedFadeIn 0.25s ease;
+}
+
+.set-completed-modal {
+    position: relative;
+
+    width: min(92vw, 380px);
+    max-width: 380px;
+
+    flex-shrink: 0;
+
+    padding: 30px 24px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    color: white;
+
+    background: linear-gradient(145deg,
+            #214f85,
+            #0f2547);
+
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5);
+
+    animation: setCompletedPop 0.35s ease;
+}
+
+.set-completed-icon {
+    font-size: 64px;
+    line-height: 1;
+
+    margin-bottom: 16px;
+}
+
+.set-completed-modal h2 {
+    margin: 0 0 10px;
+
+    font-size: clamp(24px, 6vw, 32px);
+    line-height: 1.2;
+}
+
+.set-completed-modal p {
+    margin: 0 0 24px;
+
+    color: rgba(248, 250, 252, 0.78);
+
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.set-completed-button {
+    width: 100%;
+    min-height: 48px;
+
+    padding: 12px 16px;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 1rem;
+    font-weight: 800;
+
+    color: white;
+
+    background: linear-gradient(145deg,
+            #42e695,
+            #18b84f);
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 #13873b,
+        0 10px 18px rgba(0, 0, 0, 0.3);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.set-completed-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 0 #13873b,
+        0 12px 20px rgba(0, 0, 0, 0.35);
+}
+
+.set-completed-button:active {
+    transform: translateY(3px);
+
+    box-shadow:
+        0 2px 0 #13873b,
+        0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes setCompletedFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes setCompletedPop {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .set-completed-overlay {
+        padding: 16px;
+    }
+
+    .set-completed-modal {
+        width: min(94vw, 360px);
+        padding: 26px 20px 22px;
+        border-radius: 20px;
+    }
+
+    .set-completed-icon {
+        font-size: 54px;
+        margin-bottom: 14px;
+    }
+}

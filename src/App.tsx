@@ -1,47 +1,79 @@
 import { useEffect, useState } from 'react';
-import './App.css'
-import ImageGrid from './ImageGrid'
-import LetterGrid from './LetterGrid'
+import './App.css';
+
+import ImageGrid from './ImageGrid';
+import LetterGrid from './LetterGrid';
 import WordDisplay from './WordDisplay';
+
 import levels from "./data/levels.json";
+
 import WinModal from './WinModal';
-import { shuffleLevels, getNextLevels } from "./utils/levelManager";
+
+import { shuffleLevels } from "./utils/levelManager";
 import { getLanguage, setLanguage, type Language } from './utils/getLanguage';
 import { trackEvent } from './utils/analytics';
 import playWinSound from './utils/playWinSound';
 import { getCopy } from './data/copy';
+
 import HomePage from './components/HomePage';
 import ExitModal from './components/ExitModal';
 import HelpModal from './components/HelpModal';
 import SettingsModal from './components/SettingsModal';
-import { getLevelsForSet } from './services/puzzleService';
+import SetCompletedModal from './components/SetCompletedModal';
+
 import { usePuzzleGame } from './hooks/usePuzzleGame';
 import { usePuzzleImages } from './hooks/usePuzzleImages';
 
+import { puzzleSets } from './data/puzzle-sets';
+
+
 function App() {
-  const initialLevels = shuffleLevels(levels);
+
+  // Keep a shuffled order only for the general/default game.
+  const [initialLevels] = useState(() => shuffleLevels(levels));
+
   const [hasStarted, setHasStarted] = useState(false);
+
   const [currentLevel, setCurrentLevel] =
     useState(initialLevels[0]);
-  const [language, setLanguageState] = useState<Language>(() => getLanguage());
+
+  const [language, setLanguageState] =
+    useState<Language>(() => getLanguage());
+
   const copy = getCopy(language);
 
-  const startPuzzleSet = (setId: string) => {
-    const filteredLevels = getLevelsForSet(setId);
+  // ================================
+  // PUZZLE SET STATE
+  // ================================
 
-    if (filteredLevels.length === 0) {
-      return;
-    }
+  const [selectedPuzzleSet, setSelectedPuzzleSet] =
+    useState<string | null>(null);
 
-    const shuffled = shuffleLevels(filteredLevels);
+  const [currentSetIndex, setCurrentSetIndex] =
+    useState(0);
 
-    setSelectedPuzzleSet(setId);
-    setRemainingLevels(shuffled.slice(1));
-    setCurrentLevel(shuffled[0]);
-    setHasStarted(true);
-  };
+  const [showSetCompleted, setShowSetCompleted] =
+    useState(false);
 
-  
+
+  // ================================
+  // OTHER UI STATE
+  // ================================
+
+  const [isHelpOpen, setIsHelpOpen] =
+    useState(false);
+
+  const [isSettingsOpen, setIsSettingsOpen] =
+    useState(false);
+
+  const [isExitModalOpen, setIsExitModalOpen] =
+    useState(false);
+
+
+  // ================================
+  // GAME HOOK
+  // ================================
+
   const {
     word,
     guessedLetters,
@@ -53,6 +85,11 @@ function App() {
     handleRemoveLetter,
   } = usePuzzleGame(currentLevel, language);
 
+
+  // ================================
+  // IMAGES
+  // ================================
+
   const {
     images,
     isLoading
@@ -61,141 +98,268 @@ function App() {
     hasStarted
   );
 
-  const [selectedPuzzleSet, setSelectedPuzzleSet] = useState<string | null>(null);
-  const [isHelpOpen, setIsHelpOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isExitModalOpen, setIsExitModalOpen] = useState(false);
 
-  const [remainingLevels, setRemainingLevels] =
-    useState(initialLevels.slice(1));
+  // ================================
+  // START PUZZLE SET
+  // ================================
+
+  const startPuzzleSet = (setId: string) => {
+
+    const puzzleSet = Object.values(puzzleSets).find(
+      set => set.id === setId
+    );
+
+    if (!puzzleSet || puzzleSet.levels.length === 0) {
+      return;
+    }
+
+    // Remember which set we're playing
+    setSelectedPuzzleSet(setId);
+
+    // Always start from the FIRST level
+    setCurrentSetIndex(0);
+
+    setShowSetCompleted(false);
+
+    // Get first level ID
+    const firstLevelId = puzzleSet.levels[0];
+
+    // Find actual puzzle from levels.json
+    const firstLevel = levels.find(
+      level => level.id === firstLevelId
+    );
+
+    if (!firstLevel) {
+      console.error(
+        `Level ${firstLevelId} was not found in levels.json`
+      );
+
+      return;
+    }
+
+    setCurrentLevel(firstLevel);
+    setHasStarted(true);
+  };
 
 
+  // ================================
+  // NEXT PUZZLE
+  // ================================
+
+  const handleNextPuzzle = () => {
+
+    trackEvent("next_level_clicked");
+
+    // Make sure we're playing a puzzle set
+    if (!selectedPuzzleSet) {
+      return;
+    }
+
+    const puzzleSet = Object.values(puzzleSets).find(
+      set => set.id === selectedPuzzleSet
+    );
+
+    if (!puzzleSet) {
+      return;
+    }
+
+    const nextIndex = currentSetIndex + 1;
+
+    // ================================
+    // SET IS FINISHED
+    // ================================
+
+    if (nextIndex >= puzzleSet.levels.length) {
+
+      setShowSetCompleted(true);
+
+      return;
+    }
+
+    // ================================
+    // LOAD NEXT LEVEL
+    // ================================
+
+    const nextLevelId = puzzleSet.levels[nextIndex];
+
+    const nextLevel = levels.find(
+      level => level.id === nextLevelId
+    );
+
+    if (!nextLevel) {
+      console.error(
+        `Level ${nextLevelId} was not found in levels.json`
+      );
+
+      return;
+    }
+
+    setCurrentSetIndex(nextIndex);
+    setCurrentLevel(nextLevel);
+  };
+
+  const isLastPuzzleInSet =
+    selectedPuzzleSet !== null &&
+    (() => {
+      const puzzleSet = Object.values(puzzleSets).find(
+        set => set.id === selectedPuzzleSet
+      );
+
+      return puzzleSet
+        ? currentSetIndex === puzzleSet.levels.length - 1
+        : false;
+    })();
+
+
+  // ================================
+  // TRACK PUZZLE START
+  // ================================
 
   useEffect(() => {
-    if (!hasStarted) return;
+
+    if (!hasStarted) {
+      return;
+    }
 
     trackEvent("puzzle_started", {
       level_id: currentLevel.id,
       word: currentLevel.words[language]
     });
-  }, [currentLevel.id, language, hasStarted]);
 
+  }, [
+    currentLevel.id,
+    language,
+    hasStarted
+  ]);
+
+
+  // ================================
+  // LANGUAGE
+  // ================================
 
   useEffect(() => {
     setLanguage(language);
   }, [language]);
 
-  // useEffect(() => {
-  //   if (!hasStarted) return;
 
-  //   let cancelled = false;
-
-  //   // setIsLoading(true);
-  //   // setImages([]);
-
-  //   const minimumLoadingDelay = new Promise<void>((resolve) => {
-  //     window.setTimeout(resolve, 1000);
-  //   });
-
-  //   trackEvent("puzzle_started", {
-  //     level_id: currentLevel.id,
-  //     word: currentLevel.words[language]
-  //   });
-
-  //   const path = `/levels/${currentLevel.id}`;
-  //   const imagePaths = [1, 2, 3, 4].map(num => `${path}/${num}.webp`);
-
-  //   const preloadImages = async () => {
-  //     await Promise.all([
-  //       Promise.all(
-  //         imagePaths.map((src) => new Promise<void>((resolve) => {
-  //           const img = new Image();
-  //           img.src = src;
-  //           img.onload = () => resolve();
-  //           img.onerror = () => resolve();
-  //         }))
-  //       ),
-  //       minimumLoadingDelay,
-  //     ]);
-
-  //     if (!cancelled) {
-  //       // setImages(imagePaths);
-  //       // setGuessedLetters(Array.from({ length: currentLevel.words[language].length }, () => ""));
-  //       // setAvailableLetters(generateLetters(currentLevel.words[language], language));
-  //       // setIsLoading(false);
-  //     }
-  //   };
-
-  //   void preloadImages();
-
-  //   return () => {
-  //     cancelled = true;
-  //   };
-  // }, [currentLevel, language, hasStarted]);
-
-
-
+  // ================================
+  // WIN SOUND
+  // ================================
 
   useEffect(() => {
-    if (!isCorrect) return;
+    if (!isCorrect) {
+      return;
+    }
+
     playWinSound();
-  }, [isCorrect]);
+
+    if (isLastPuzzleInSet) {
+      setShowSetCompleted(true);
+    }
+  }, [isCorrect, isLastPuzzleInSet]);
 
 
+  // ================================
+  // HOME
+  // ================================
 
   if (!hasStarted) {
+
     return (
-      <HomePage language={language}
+      <HomePage
+        language={language}
         copy={copy}
+
         isSettingsOpen={isSettingsOpen}
-        onOpenSettings={() => setIsSettingsOpen(true)}
-        onCloseSettings={() => setIsSettingsOpen(false)}
+
+        onOpenSettings={() =>
+          setIsSettingsOpen(true)
+        }
+
+        onCloseSettings={() =>
+          setIsSettingsOpen(false)
+        }
+
         onLanguageChange={setLanguageState}
-        onStartPuzzleSet={startPuzzleSet}></HomePage>
+
+        onStartPuzzleSet={startPuzzleSet}
+      />
     );
   }
 
+
+  // ================================
+  // GAME
+  // ================================
+
   return (
     <main className="game-container">
+
       <div className="top-actions">
+
         <button
           className="settings-button"
-          onClick={() => setIsExitModalOpen(true)}
+          onClick={() =>
+            setIsExitModalOpen(true)
+          }
           aria-label="Exit game"
           type="button"
         >
           ✕
         </button>
+
         <button
           className="settings-button"
-          onClick={() => setIsSettingsOpen(true)}
+          onClick={() =>
+            setIsSettingsOpen(true)
+          }
           aria-label="Open settings"
           type="button"
         >
           ⚙
         </button>
+
         <button
           className="help-button"
-          onClick={() => setIsHelpOpen(true)}
+          onClick={() =>
+            setIsHelpOpen(true)
+          }
           aria-label="How to play"
           type="button"
         >
           ?
         </button>
+
       </div>
 
+
+      {/* ================================
+          LOADING / GAME
+      ================================= */}
+
       {isLoading ? (
-        <div className="loading-state" role="status" aria-live="polite">
+
+        <div
+          className="loading-state"
+          role="status"
+          aria-live="polite"
+        >
           <div className="loading-spinner" />
-          <p>{copy.loading}</p>
+
+          <p>
+            {copy.loading}
+          </p>
         </div>
+
       ) : (
+
         <>
           <ImageGrid images={images} />
 
           <WordDisplay
             word={word}
             guessedLetters={guessedLetters}
+
             status={
               isCorrect
                 ? "correct"
@@ -203,6 +367,7 @@ function App() {
                   ? "wrong"
                   : "normal"
             }
+
             onLetterClick={handleRemoveLetter}
           />
 
@@ -211,51 +376,111 @@ function App() {
             onLetterClick={handleLetterClick}
           />
         </>
+
       )}
 
+
+      {/* ================================
+          WIN MODAL
+      ================================= */}
+
       <WinModal
-        isOpen={isCorrect}
+        isOpen={isCorrect && !isLastPuzzleInSet}
         language={language}
         stars={roundStars}
-        onNext={() => {
-          trackEvent("next_level_clicked");
-          const next = getNextLevels(remainingLevels, levels);
-
-          // setIsLoading(true);
-          // setImages([]);
-          // setGuessedLetters([]);
-          // setAvailableLetters([]);
-          // setRoundStars(5);
-          setCurrentLevel(next.currentLevel);
-          setRemainingLevels(next.remainingLevels);
-        }}
+        onNext={handleNextPuzzle}
       />
 
-      {isHelpOpen && <HelpModal
-        isOpen={isHelpOpen}
-        copy={copy.help}
-        onClose={() => setIsHelpOpen(false)}
-      />}
 
-      {isSettingsOpen && <SettingsModal
-        isOpen={isSettingsOpen}
-        language={language}
-        copy={copy}
-        onClose={() => setIsSettingsOpen(false)}
-        onLanguageChange={setLanguageState}
-      />}
+      {/* ================================
+          HELP
+      ================================= */}
 
-      {isExitModalOpen && <ExitModal
-        isOpen={isExitModalOpen}
-        copy={copy.exitModal}
-        onClose={() => setIsExitModalOpen(false)}
-        onConfirm={() => {
-          setIsExitModalOpen(false);
-          setHasStarted(false);
-        }}
-      />}
+      {isHelpOpen && (
+
+        <HelpModal
+          isOpen={isHelpOpen}
+          copy={copy.help}
+          onClose={() =>
+            setIsHelpOpen(false)
+          }
+        />
+
+      )}
+
+
+      {/* ================================
+          SETTINGS
+      ================================= */}
+
+      {isSettingsOpen && (
+
+        <SettingsModal
+          isOpen={isSettingsOpen}
+          language={language}
+          copy={copy}
+
+          onClose={() =>
+            setIsSettingsOpen(false)
+          }
+
+          onLanguageChange={setLanguageState}
+        />
+
+      )}
+
+
+      {/* ================================
+          EXIT
+      ================================= */}
+
+      {isExitModalOpen && (
+
+        <ExitModal
+          isOpen={isExitModalOpen}
+          copy={copy.exitModal}
+
+          onClose={() =>
+            setIsExitModalOpen(false)
+          }
+
+          onConfirm={() => {
+
+            setIsExitModalOpen(false);
+
+            setHasStarted(false);
+
+            setSelectedPuzzleSet(null);
+
+            setCurrentSetIndex(0);
+
+            setShowSetCompleted(false);
+          }}
+        />
+
+      )}
+
+
+      {/* ================================
+          PUZZLE SET COMPLETED
+      ================================= */}
+
+      {showSetCompleted && (
+
+        <SetCompletedModal
+          copy={copy.setCompleted}
+          onBackToPuzzleSets={() => {
+            setShowSetCompleted(false);
+            setHasStarted(false);
+            setSelectedPuzzleSet(null);
+            setCurrentSetIndex(0);
+          }}
+        />
+
+      )}
+
     </main>
   );
 }
 
-export default App
+export default App;

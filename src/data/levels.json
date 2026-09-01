@@ -278,5 +278,145 @@
       "en": "PANDA",
       "tr": "PANDA"
     }
+  },
+  {
+    "id": 41,
+    "words": {
+      "en": "PIZZA",
+      "tr": "PİZZA"
+    }
+  },
+  {
+    "id": 42,
+    "words": {
+      "en": "BURGER",
+      "tr": "BURGER"
+    }
+  },
+  {
+    "id": 43,
+    "words": {
+      "en": "BANANA",
+      "tr": "MUZ"
+    }
+  },
+  {
+    "id": 44,
+    "words": {
+      "en": "CHOCOLATE",
+      "tr": "ÇİKOLATA"
+    }
+  },
+  {
+    "id": 45,
+    "words": {
+      "en": "POPCORN",
+      "tr": "PATLAMIŞ MISIR"
+    }
+  },
+  {
+    "id": 46,
+    "words": {
+      "en": "ICECREAM",
+      "tr": "DONDURMA"
+    }
+  },
+  {
+    "id": 47,
+    "words": {
+      "en": "SANDWICH",
+      "tr": "SANDVİÇ"
+    }
+  },
+  {
+    "id": 48,
+    "words": {
+      "en": "WATERMELON",
+      "tr": "KARPUZ"
+    }
+  },
+  {
+    "id": 49,
+    "words": {
+      "en": "SPAGHETTI",
+      "tr": "SPAGETTİ"
+    }
+  },
+  {
+    "id": 50,
+    "words": {
+      "en": "PANCAKE",
+      "tr": "PANKEK"
+    }
+  },
+  {
+    "id": 51,
+    "words": {
+      "en": "DINOSAUR",
+      "tr": "DİNOZOR"
+    }
+  },
+  {
+    "id": 52,
+    "words": {
+      "en": "VOLCANO",
+      "tr": "VOLKAN"
+    }
+  },
+  {
+    "id": 53,
+    "words": {
+      "en": "FOSSIL",
+      "tr": "FOSİL"
+    }
+  },
+  {
+    "id": 54,
+    "words": {
+      "en": "METEORITE",
+      "tr": "METEORİT"
+    }
+  },
+  {
+    "id": 55,
+    "words": {
+      "en": "CAVE",
+      "tr": "MAĞARA"
+    }
+  },
+  {
+    "id": 56,
+    "words": {
+      "en": "AMBER",
+      "tr": "KEHRİBAR"
+    }
+  },
+  {
+    "id": 57,
+    "words": {
+      "en": "MAMMOTH",
+      "tr": "MAMUT"
+    }
+  },
+  {
+    "id": 58,
+    "words": {
+      "en": "ICE AGE",
+      "tr": "BUZUL ÇAĞI"
+    }
+  },
+  {
+    "id": 59,
+    "words": {
+      "en": "FOOTPRINT",
+      "tr": "AYAK İZİ"
+    }
+  },
+  {
+    "id": 60,
+    "words": {
+      "en": "SKELETON",
+      "tr": "İSKELET"
+    }
   }
 ]

@@ -4,7 +4,8 @@ const alphabets = {
 };
 
 export default function generateLetters(word: string, language: "en" | "tr") {
-  const letters = word.toUpperCase().split("");
+  const cleanWord = word.replace(/\s/g, "");
+  const letters = cleanWord.toUpperCase().split("");
   const alphabet = alphabets[language];
 
   while (letters.length < 12) {

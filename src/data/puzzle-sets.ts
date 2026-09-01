@@ -4,11 +4,16 @@ export interface PuzzleSet {
         en: string;
         tr: string;
     };
+    puzzleLabel: {
+        en: string;
+        tr: string;
+    };
     levels: number[];
     image: string;
 }
 
 export const puzzleSets = {
+
     whatIsThisAnimal: {
         id: "what-is-this-animal",
         title: {
@@ -21,5 +26,34 @@ export const puzzleSets = {
         },
         levels: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
         image: "/sets/animals.jpg"
+    },
+
+    whatIsThisFood: {
+        id: "what-is-this-food",
+        title: {
+            en: "What Is This Food?",
+            tr: "Bu Hangi Yemek?"
+        },
+        puzzleLabel: {
+            en: "puzzles",
+            tr: "bulmaca"
+        },
+        levels: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+        image: "/sets/food.jpg"
+    },
+
+    prehistoricWorld: {
+        id: "prehistoric-world",
+        title: {
+            en: "Prehistoric World",
+            tr: "Tarih Öncesi Dünya"
+        },
+        puzzleLabel: {
+            en: "puzzles",
+            tr: "bulmaca"
+        },
+        levels: [51, 52, 53, 54, 55, 56, 57, 58, 59, 60],
+        image: "/sets/prehistoric.jpg"
     }
-}
+
+};

@@ -14,12 +14,12 @@ export function usePuzzleGame(
     currentLevel: Level,
     language: Language
 ) {
+
     const word = currentLevel.words[language];
 
     const [guessedLetters, setGuessedLetters] = useState<string[]>(
-        Array.from({ length: word.length }, () => "")
+        () => Array.from(word, () => "")
     );
-
     const [availableLetters, setAvailableLetters] = useState<string[]>(
         generateLetters(word, language)
     );
@@ -29,7 +29,7 @@ export function usePuzzleGame(
     // Reset puzzle state whenever the level or language changes
     useEffect(() => {
         setGuessedLetters(
-            Array.from({ length: word.length }, () => "")
+            Array.from(word, char => char === " " ? " " : "")
         );
 
         setAvailableLetters(
