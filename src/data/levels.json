@@ -208,5 +208,75 @@
       "en": "CAMERA",
       "tr": "KAMERA"
     }
+  },
+  {
+    "id": 31,
+    "words": {
+      "en": "LION",
+      "tr": "ASLAN"
+    }
+  },
+  {
+    "id": 32,
+    "words": {
+      "en": "ELEPHANT",
+      "tr": "FİL"
+    }
+  },
+  {
+    "id": 33,
+    "words": {
+      "en": "GIRAFFE",
+      "tr": "ZÜRAFA"
+    }
+  },
+  {
+    "id": 34,
+    "words": {
+      "en": "PENGUIN",
+      "tr": "PENGUEN"
+    }
+  },
+  {
+    "id": 35,
+    "words": {
+      "en": "TIGER",
+      "tr": "KAPLAN"
+    }
+  },
+  {
+    "id": 36,
+    "words": {
+      "en": "KOALA",
+      "tr": "KOALA"
+    }
+  },
+  {
+    "id": 37,
+    "words": {
+      "en": "ZEBRA",
+      "tr": "ZEBRA"
+    }
+  },
+  {
+    "id": 38,
+    "words": {
+      "en": "KANGAROO",
+      "tr": "KANGURU"
+    }
+  },
+  {
+    "id": 39,
+    "words": {
+      "en": "CROCODILE",
+      "tr": "TİMSAH"
+    }
+  },
+  {
+    "id": 40,
+    "words": {
+      "en": "PANDA",
+      "tr": "PANDA"
+    }
   }
 ]
