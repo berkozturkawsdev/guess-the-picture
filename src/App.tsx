@@ -12,7 +12,6 @@ import { getLanguage, setLanguage, type Language } from './utils/getLanguage';
 import { trackEvent } from './utils/analytics';
 import playWinSound from './utils/playWinSound';
 import heroImage from './assets/hero.webp';
-import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [language, setLanguageState] = useState<Language>(() => getLanguage());
