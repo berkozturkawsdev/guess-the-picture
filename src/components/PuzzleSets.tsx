@@ -1,13 +1,6 @@
 import type { Language } from "../utils/getLanguage";
-
-interface PuzzleSet {
-    id: string;
-    title: {
-        en: string;
-        tr: string;
-    };
-    levels: number[];
-}
+import type { PuzzleSet } from "../data/puzzle-sets";
+import "./PuzzleSets.css";
 
 interface PuzzleSetsProps {
     puzzleSets: Record<string, PuzzleSet>;
@@ -37,7 +30,11 @@ function PuzzleSets({
                         type="button"
                         onClick={() => onSelect(set.id)}
                     >
-                        <span className="puzzle-set-icon">🐾</span>
+                        <img
+                            className="puzzle-set-image"
+                            src={set.image}
+                            alt={set.title[language]}
+                        />
 
                         <strong>
                             {set.title[language]}

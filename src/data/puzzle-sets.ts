@@ -1,3 +1,13 @@
+export interface PuzzleSet {
+    id: string;
+    title: {
+        en: string;
+        tr: string;
+    };
+    levels: number[];
+    image: string;
+}
+
 export const puzzleSets = {
     whatIsThisAnimal: {
         id: "what-is-this-animal",
@@ -9,6 +19,7 @@ export const puzzleSets = {
             en: "puzzles",
             tr: "bulmaca"
         },
-        levels: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+        levels: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
+        image: "/sets/animals.jpg"
     }
 }

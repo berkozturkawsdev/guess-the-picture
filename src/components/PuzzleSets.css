@@ -1,0 +1,206 @@
+/* =========================================
+   Puzzle Sets
+========================================= */
+
+.puzzle-sets {
+    width: 100%;
+    margin-top: 48px;
+}
+
+.puzzle-sets h2 {
+    margin: 0 0 20px;
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: left;
+}
+
+/* =========================================
+   Grid
+========================================= */
+
+.puzzle-set-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+}
+
+/* =========================================
+   Puzzle Card
+========================================= */
+
+.puzzle-set-card {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 16px 12px 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.puzzle-set-card:hover {
+    transform: translateY(-5px);
+
+    background: rgba(255, 255, 255, 0.13);
+
+    border-color: rgba(255, 255, 255, 0.2);
+
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.28);
+}
+
+.puzzle-set-card:active {
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   Puzzle Set Image
+========================================= */
+
+.puzzle-set-image {
+    width: 180px;
+    height: 180px;
+
+    display: block;
+
+    object-fit: contain;
+
+    margin: 0 auto 12px;
+
+    border-radius: 16px;
+}
+
+/* =========================================
+   Puzzle Set Title
+========================================= */
+
+.puzzle-set-card strong {
+    display: block;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0 6px;
+
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.3;
+
+    text-align: center;
+}
+
+/* =========================================
+   Puzzle Count
+========================================= */
+
+.puzzle-set-card>span {
+    display: block;
+
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 0.85rem;
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+/* =========================================
+   Large Desktop
+========================================= */
+
+@media (min-width: 1200px) {
+    .puzzle-set-grid {
+        gap: 20px;
+    }
+
+    .puzzle-set-card {
+        padding: 18px 14px 20px;
+    }
+
+    .puzzle-set-image {
+        width: 190px;
+        height: 190px;
+    }
+}
+
+/* =========================================
+   Tablet
+========================================= */
+
+@media (max-width: 900px) {
+
+    .puzzle-sets {
+        margin-top: 40px;
+    }
+
+    .puzzle-set-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .puzzle-set-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 480px) {
+
+    .puzzle-sets {
+        margin-top: 32px;
+    }
+
+    .puzzle-sets h2 {
+        margin-bottom: 14px;
+        font-size: 1.3rem;
+    }
+
+    .puzzle-set-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .puzzle-set-card {
+        padding: 10px 8px 14px;
+        border-radius: 16px;
+    }
+
+    .puzzle-set-image {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 9px;
+    }
+
+    .puzzle-set-card strong {
+        font-size: 0.85rem;
+    }
+
+    .puzzle-set-card>span {
+        margin-top: 4px;
+        font-size: 0.74rem;
+    }
+}
