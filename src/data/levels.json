@@ -488,5 +488,145 @@
       "en": "CAPTAIN",
       "tr": "KAPTAN"
     }
+  },
+  {
+    "id": 71,
+    "words": {
+      "en": "PYRAMID",
+      "tr": "PİRAMİT"
+    }
+  },
+  {
+    "id": 72,
+    "words": {
+      "en": "PHARAOH",
+      "tr": "FİRAVUN"
+    }
+  },
+  {
+    "id": 73,
+    "words": {
+      "en": "MUMMY",
+      "tr": "MUMYA"
+    }
+  },
+  {
+    "id": 74,
+    "words": {
+      "en": "SPHINX",
+      "tr": "SİFİNK"
+    }
+  },
+  {
+    "id": 75,
+    "words": {
+      "en": "SCARAB",
+      "tr": "BOK BÖCEĞİ"
+    }
+  },
+  {
+    "id": 76,
+    "words": {
+      "en": "HIEROGLYPH",
+      "tr": "HİYEROGLİF"
+    }
+  },
+  {
+    "id": 77,
+    "words": {
+      "en": "DESERT",
+      "tr": "ÇÖL"
+    }
+  },
+  {
+    "id": 78,
+    "words": {
+      "en": "TEMPLE",
+      "tr": "TAPINAK"
+    }
+  },
+  {
+    "id": 79,
+    "words": {
+      "en": "PAPYRUS",
+      "tr": "PAPİRÜS"
+    }
+  },
+  {
+    "id": 80,
+    "words": {
+      "en": "TOMB",
+      "tr": "MEZAR"
+    }
+  },
+  {
+    "id": 81,
+    "words": {
+      "en": "SUBMARINE",
+      "tr": "DENİZALTI"
+    }
+  },
+  {
+    "id": 82,
+    "words": {
+      "en": "SHARK",
+      "tr": "KÖPEKBALIĞI"
+    }
+  },
+  {
+    "id": 83,
+    "words": {
+      "en": "OCTOPUS",
+      "tr": "AHTAPOT"
+    }
+  },
+  {
+    "id": 84,
+    "words": {
+      "en": "CORAL",
+      "tr": "MERCAN"
+    }
+  },
+  {
+    "id": 85,
+    "words": {
+      "en": "JELLYFISH",
+      "tr": "DENİZANASI"
+    }
+  },
+  {
+    "id": 86,
+    "words": {
+      "en": "WHALE",
+      "tr": "BALİNA"
+    }
+  },
+  {
+    "id": 87,
+    "words": {
+      "en": "ANGLERFISH",
+      "tr": "FENER BALIĞI"
+    }
+  },
+  {
+    "id": 88,
+    "words": {
+      "en": "TRENCH",
+      "tr": "ÇUKUR"
+    }
+  },
+  {
+    "id": 89,
+    "words": {
+      "en": "DIVING",
+      "tr": "DALIŞ"
+    }
+  },
+  {
+    "id": 90,
+    "words": {
+      "en": "SUNKEN",
+      "tr": "BATMIŞ"
+    }
   }
 ]

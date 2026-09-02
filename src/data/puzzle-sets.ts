@@ -67,6 +67,31 @@ export const puzzleSets = {
         },
         levels: [61, 62, 63, 64, 65, 66, 67, 68, 69, 70],
         image: "/sets/pirate.png"
-    }
-
+    },
+    ancientEgypt: {
+        id: "ancient-egypt",
+        title: {
+            en: "Ancient Egypt",
+            tr: "Antik Mısır"
+        },
+        puzzleLabel: {
+            en: "puzzles",
+            tr: "bulmaca"
+        },
+        levels: [71, 72, 73, 74, 75, 76, 77, 78, 79, 80],
+        image: "/sets/egypt.jpg"
+    },
+    deepOcean: {
+        id: "deep-ocean",
+        title: {
+            en: "Deep Ocean",
+            tr: "Derin Okyanus"
+        },
+        puzzleLabel: {
+            en: "puzzles",
+            tr: "bulmaca"
+        },
+        levels: [81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
+        image: "/sets/ocean.jpg"
+    },
 };
