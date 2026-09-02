@@ -62,15 +62,6 @@ function HomePage({
                         <p className="hero-copy">
                             {copy.intro}
                         </p>
-
-                        <button
-                            className="play-button"
-                            type="button"
-                            onClick={() => onStartPuzzleSet("what-is-this-animal")}
-                        >
-                            <span aria-hidden="true">▶</span>
-                            {copy.playButton}
-                        </button>
                     </div>
 
                 </div>

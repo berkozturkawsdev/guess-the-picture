@@ -418,5 +418,75 @@
       "en": "SKELETON",
       "tr": "İSKELET"
     }
+  },
+  {
+    "id": 61,
+    "words": {
+      "en": "TREASURE",
+      "tr": "HAZİNE"
+    }
+  },
+  {
+    "id": 62,
+    "words": {
+      "en": "PIRATE",
+      "tr": "KORSAN"
+    }
+  },
+  {
+    "id": 63,
+    "words": {
+      "en": "ANCHOR",
+      "tr": "ÇAPA"
+    }
+  },
+  {
+    "id": 64,
+    "words": {
+      "en": "ISLAND",
+      "tr": "ADA"
+    }
+  },
+  {
+    "id": 65,
+    "words": {
+      "en": "CANNON",
+      "tr": "TOP"
+    }
+  },
+  {
+    "id": 66,
+    "words": {
+      "en": "COMPASS",
+      "tr": "PUSULA"
+    }
+  },
+  {
+    "id": 67,
+    "words": {
+      "en": "PARROT",
+      "tr": "PAPAĞAN"
+    }
+  },
+  {
+    "id": 68,
+    "words": {
+      "en": "SHIPWRECK",
+      "tr": "GEMİ ENKAZI"
+    }
+  },
+  {
+    "id": 69,
+    "words": {
+      "en": "CHEST",
+      "tr": "SANDIK"
+    }
+  },
+  {
+    "id": 70,
+    "words": {
+      "en": "CAPTAIN",
+      "tr": "KAPTAN"
+    }
   }
 ]
