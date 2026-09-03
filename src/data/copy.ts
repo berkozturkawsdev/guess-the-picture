@@ -5,46 +5,83 @@ export interface Copy {
     title: string;
     intro: string;
     playButton: string;
+
+    login: string;
+    logout: string;
+    player: string;
+
+    loginModal: {
+        title: string;
+        message: string;
+        googleButton: string;
+        footer: string;
+        heading: string;
+    };
+
     highlights: {
         title: string;
         text: string;
     }[];
+
+    loading: string;
+
     settingsTitle: string;
     languageLabel: string;
     english: string;
     turkish: string;
+    close: string;
+
     puzzleSets: {
-        title: string,
-        puzzles: string
-    },
+        title: string;
+        puzzles: string;
+    };
+
     exitModal: {
-        title: string,
-        message: string,
-        cancel: string,
-        confirm: string
-    },
+        title: string;
+        message: string;
+        cancel: string;
+        confirm: string;
+    };
+
     help: {
-        title: string,
-        body: string,
-        list: string[],
-        aboutTitle: string,
-        aboutBody: string
-    },
+        title: string;
+        body: string;
+        list: string[];
+        aboutTitle: string;
+        aboutBody: string;
+    };
+
     setCompleted: {
         title: string;
         message: string;
         button: string;
     };
-};
+}
 
-export const getCopy = (language: Language) =>
+export const getCopy = (language: Language): Copy =>
     language === "tr"
         ? {
             badge: "Ücretsiz Görsel Kelime Bulmaca",
+
             title: "Resme Bak ve Tahmin Et",
+
             intro:
                 "Dört görsel ipucuyla tek bir kelimeyi bulduğun ücretsiz bir kelime bulmaca oyunu oyna. Kelime dağarcığını test et, gözlem becerilerini geliştir ve eğlenceli bir günlük meydan okuma yaşa.",
+
             playButton: "Başla",
+
+            login: "Giriş Yap",
+            logout: "Çıkış Yap",
+            player: "Oyuncu",
+
+            loginModal: {
+                title: "OYUNA KATIL",
+                message:
+                    "İlerlemeni kaydetmek ve skor tablosunda yarışmak için giriş yap.",
+                googleButton: "Google ile devam et",
+                footer: "Oynaması ücretsiz",
+                heading: "Oynamaya hazır mısın?",
+            },
 
             highlights: [
                 {
@@ -69,23 +106,22 @@ export const getCopy = (language: Language) =>
             turkish: "Türkçe",
             close: "Kapat",
 
-            exitTitle: "Oyundan Çık?",
-            exitBody: "Bulmacayı bırakmak istediğinden emin misin?",
-            exitConfirm: "Çık",
-            exitCancel: "Devam Et",
             puzzleSets: {
                 title: "Bulmaca Setleri",
                 puzzles: "bulmaca",
             },
+
             exitModal: {
                 title: "Oyundan Çık?",
                 message: "Bulmacayı bırakmak istediğinden emin misin?",
                 cancel: "Devam Et",
                 confirm: "Çık",
             },
+
             help: {
                 title: "Nasıl Oynanır",
-                body: "Bu oyunda dört görsel tek bir kelimeye işaret eder. Harf butonlarını kullanarak kelimeyi tahmin et ve bulmacayı tamamla.",
+                body:
+                    "Bu oyunda dört görsel tek bir kelimeye işaret eder. Harf butonlarını kullanarak kelimeyi tahmin et ve bulmacayı tamamla.",
                 list: [
                     "Görsel ipuçlarını dikkatlice incele.",
                     "Cevabı oluşturacak harfleri seç.",
@@ -94,6 +130,7 @@ export const getCopy = (language: Language) =>
                 aboutTitle: "Hakkında",
                 aboutBody: "Berk Öztürk tarafından oluşturuldu.",
             },
+
             setCompleted: {
                 title: "Bulmaca Seti Tamamlandı!",
                 message: "Bu setteki tüm bulmacaları tamamladın.",
@@ -102,10 +139,26 @@ export const getCopy = (language: Language) =>
         }
         : {
             badge: "Free Picture Word Puzzle",
+
             title: "Guess the Picture",
+
             intro:
                 "Play an addictive word puzzle game where four picture clues lead to one hidden word. Test your vocabulary, sharpen your observation skills, and enjoy a fun daily challenge.",
+
             playButton: "Play Now",
+
+            login: "Login",
+            logout: "Logout",
+            player: "Player",
+
+            loginModal: {
+                title: "JOIN THE GAME",
+                message:
+                    "Sign in to save your progress and compete on the scoreboard.",
+                googleButton: "Continue with Google",
+                footer: "Free to play",
+                heading: "Ready to play?",
+            },
 
             highlights: [
                 {
@@ -130,23 +183,22 @@ export const getCopy = (language: Language) =>
             turkish: "Turkish",
             close: "Close",
 
-            exitTitle: "Exit Game?",
-            exitBody: "Are you sure you want to stop playing?",
-            exitConfirm: "Exit",
-            exitCancel: "Keep Playing",
             puzzleSets: {
                 title: "Puzzle Sets",
                 puzzles: "puzzles",
             },
+
             exitModal: {
                 title: "Exit Game?",
                 message: "Are you sure you want to stop playing?",
                 cancel: "Keep Playing",
                 confirm: "Exit",
             },
+
             help: {
                 title: "How to Play",
-                body: "This game shows you four pictures that hint at a single word. Use the letter buttons to guess the word and complete the puzzle.",
+                body:
+                    "This game shows you four pictures that hint at a single word. Use the letter buttons to guess the word and complete the puzzle.",
                 list: [
                     "Look at the clue images carefully.",
                     "Pick the letters that form the answer.",
@@ -155,6 +207,7 @@ export const getCopy = (language: Language) =>
                 aboutTitle: "About",
                 aboutBody: "Built by Berk Öztürk.",
             },
+
             setCompleted: {
                 title: "Puzzle Set Completed!",
                 message: "You've completed all puzzles in this set.",

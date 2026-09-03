@@ -27,13 +27,11 @@ function Navbar({
 
                     {/* Brand */}
                     <div className="navbar-brand">
-                        <span className="navbar-logo">
-                            🧩
-                        </span>
-
-                        <span className="navbar-title">
-                            Guess the Picture
-                        </span>
+                        <img
+                            className="navbar-logo"
+                            src="/favicon.jpg"
+                            alt="Guess the Picture"
+                        />
                     </div>
 
 

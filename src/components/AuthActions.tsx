@@ -1,9 +1,13 @@
 import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from "./GoogleLoginButton";
 import "./AuthActions.css";
-
+import { useLanguage } from "../context/LanguageContext";
+import { getCopy } from "../data/copy";
+import { LogOut } from "lucide-react";
 function AuthActions() {
     const { user, loading, signOut } = useAuth();
+    const { language } = useLanguage();
+    const copy = getCopy(language);
 
     if (loading) {
         return null;
@@ -20,7 +24,7 @@ function AuthActions() {
     const displayName =
         user.user_metadata.full_name ||
         user.user_metadata.name ||
-        "Player";
+        copy.player;
 
     const initial = displayName.charAt(0).toUpperCase();
 
@@ -40,24 +44,10 @@ function AuthActions() {
                 className="logout-button"
                 onClick={signOut}
                 type="button"
-                aria-label="Logout"
-                title="Logout"
+                aria-label={copy.logout}
+                title={copy.logout}
             >
-                <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                >
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                    <polyline points="16 17 21 12 16 7" />
-                    <line x1="21" y1="12" x2="9" y2="12" />
-                </svg>
+                <LogOut size={18} strokeWidth={2.2} />
             </button>
         </div>
     );

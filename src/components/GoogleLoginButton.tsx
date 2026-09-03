@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useLanguage } from "../context/LanguageContext";
+import { getCopy } from "../data/copy";
 import "./GoogleLoginButton.css";
+import { CircleUserRound, LogIn, Sparkles } from "lucide-react";
 
 export default function GoogleLoginButton() {
     const [isOpen, setIsOpen] = useState(false);
+
     const { signInWithGoogle } = useAuth();
+    const { language } = useLanguage();
+
+    const copy = getCopy(language);
 
     return (
         <>
@@ -13,8 +20,8 @@ export default function GoogleLoginButton() {
                 className="game-login-button"
                 onClick={() => setIsOpen(true)}
             >
-                <span className="game-login-icon">🎮</span>
-                <span>PLAYER LOGIN</span>
+                <LogIn size={18} strokeWidth={2.2} />
+                <span>{copy.login}</span>
             </button>
 
             {isOpen && (
@@ -30,21 +37,38 @@ export default function GoogleLoginButton() {
                             type="button"
                             className="login-modal-close"
                             onClick={() => setIsOpen(false)}
-                            aria-label="Close"
+                            aria-label={copy.close}
+                            title={copy.close}
                         >
                             ×
                         </button>
 
                         <div className="login-modal-icon">
-                            🎮
+                            <div className="login-modal-icon-glow" />
+
+                            <div className="login-modal-icon-inner">
+                                <LogIn size={30} strokeWidth={2.2} />
+                            </div>
+
+                            <Sparkles
+                                className="login-modal-sparkle"
+                                size={15}
+                                strokeWidth={2}
+                            />
                         </div>
+                        <div className="login-modal-heading">
+                            <span className="login-modal-eyebrow">
+                                {copy.loginModal.title}
+                            </span>
 
-                        <h2>JOIN THE GAME</h2>
+                            <h2>
+                                {copy.loginModal.heading}
+                            </h2>
 
-                        <p>
-                            Sign in to save your progress and compete
-                            on the scoreboard.
-                        </p>
+                            <p>
+                                {copy.loginModal.message}
+                            </p>
+                        </div>
 
                         <button
                             type="button"
@@ -75,11 +99,11 @@ export default function GoogleLoginButton() {
                                 />
                             </svg>
 
-                            Continue with Google
+                            {copy.loginModal.googleButton}
                         </button>
 
                         <span className="login-modal-footer">
-                            Free to play
+                            {copy.loginModal.footer}
                         </span>
                     </div>
                 </div>

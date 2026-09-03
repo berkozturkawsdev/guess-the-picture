@@ -1,27 +1,39 @@
+/* =========================================================
+   AUTH ACTIONS
+   ========================================================= */
+
 .auth-actions {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-/* =========================
-   Player Badge
-   ========================= */
+/* =========================================================
+   PLAYER BADGE
+   ========================================================= */
 
 .player-badge {
     display: flex;
     align-items: center;
     gap: 9px;
+
     height: 42px;
     padding: 3px 12px 3px 4px;
     box-sizing: border-box;
 
-    background: linear-gradient(145deg, #214f85, #0f2547);
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(15, 37, 71, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 12px;
 
     color: white;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+
+    box-shadow:
+        0 5px 16px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .player-avatar {
@@ -31,18 +43,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     flex-shrink: 0;
 
     background: #ffd43b;
     color: #111;
 
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.25);
     border-radius: 9px;
 
     font-size: 14px;
     font-weight: 900;
 
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    box-shadow:
+        0 3px 7px rgba(0, 0, 0, 0.25);
 }
 
 .player-name {
@@ -53,13 +67,14 @@
     white-space: nowrap;
 
     color: white;
+
     font-size: 13px;
     font-weight: 800;
 }
 
-/* =========================
-   Logout
-   ========================= */
+/* =========================================================
+   LOGOUT
+   ========================================================= */
 
 .logout-button {
     width: 42px;
@@ -68,14 +83,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     flex-shrink: 0;
 
     padding: 0;
 
-    background: linear-gradient(145deg, #214f85, #0f2547);
+    background: rgba(15, 37, 71, 0.72);
     color: rgba(255, 255, 255, 0.85);
 
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 12px;
 
     font-family: inherit;
@@ -84,49 +100,62 @@
 
     cursor: pointer;
 
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 5px 16px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
     transition:
         transform 0.15s ease,
-        background 0.15s ease,
-        color 0.15s ease,
-        box-shadow 0.15s ease;
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .logout-button:hover {
-    background: linear-gradient(145deg, #b83b4b, #7f2433);
+    background: rgba(127, 36, 51, 0.85);
     color: white;
+
     transform: translateY(-2px);
 
-    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.35);
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        0 0 14px rgba(184, 59, 75, 0.18);
 }
 
 .logout-button:active {
     transform: translateY(1px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* =========================
-   Navbar
-   ========================= */
+/* =========================================================
+   NAVBAR
+   ========================================================= */
 
 .navbar {
     position: fixed;
+
     top: 0;
     left: 0;
     right: 0;
 
     width: 100%;
-    padding: 16px 20px 0;
+
+    padding: 12px 20px 0;
 
     box-sizing: border-box;
 
     z-index: 1000;
+
+    pointer-events: none;
+
+    /* Allows the game behind to remain visually dominant */
 }
 
 .navbar-inner {
     width: min(1100px, 100%);
-    min-height: 58px;
+    min-height: 56px;
 
     margin: 0 auto;
 
@@ -137,58 +166,81 @@
 
     box-sizing: border-box;
 
-    padding: 7px 8px 7px 14px;
+    padding: 6px 7px 6px 8px;
 
-    background: linear-gradient(145deg, #214f85, #0f2547);
+    /* Glass effect */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(33, 79, 133, 0.82),
+            rgba(15, 37, 71, 0.82)
+        );
 
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
 
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.22),
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+
+    pointer-events: auto;
+
+    /* Smooth floating effect */
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
+
+/* =========================================================
+   NAVBAR BRAND
+   ========================================================= */
 
 .navbar-brand {
     display: flex;
-    flex-direction: row;
     align-items: center;
 
-    gap: 10px;
-    min-width: 0;
+    flex-shrink: 0;
 }
 
 .navbar-logo {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+
     flex-shrink: 0;
 
-    background: #ffd43b;
-    border-radius: 10px;
+    border-radius: 11px;
 
-    font-size: 20px;
+    object-fit: contain;
 
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.22);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.navbar-title {
-    color: white;
+.navbar-logo:hover {
+    transform: translateY(-1px) scale(1.03);
 
-    font-size: 17px;
-    font-weight: 900;
-    letter-spacing: 0.2px;
-
-    white-space: nowrap;
+    box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.28);
 }
 
-/* =========================
-   Navbar Actions
-   ========================= */
+/* =========================================================
+   NAVBAR ACTIONS
+   ========================================================= */
 
 .navbar-actions {
     display: flex;
+
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
@@ -196,50 +248,64 @@
     flex-wrap: nowrap;
     flex-shrink: 0;
 
-    gap: 8px;
+    gap: 7px;
 }
 
-/* =========================
-   Help / Settings / Language
-   ========================= */
+/* =========================================================
+   NAVBAR ICON BUTTONS
+   ========================================================= */
 
 .navbar-icon-button,
 .navbar-language-button {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     flex-shrink: 0;
 
     padding: 0;
 
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.16);
-    color: white;
+    background: rgba(255, 255, 255, 0.10);
+
+    color: rgba(255, 255, 255, 0.92);
 
     font-family: inherit;
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 800;
 
     cursor: pointer;
 
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
     transition:
+        transform 0.15s ease,
         background 0.2s ease,
-        transform 0.15s ease;
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .navbar-icon-button:hover,
 .navbar-language-button:hover {
-    background: rgba(255, 255, 255, 0.24);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.18);
+
+    border-color: rgba(255, 255, 255, 0.22);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(0, 0, 0, 0.22),
+        0 0 12px rgba(255, 255, 255, 0.05);
 }
 
 .navbar-icon-button:active,
@@ -247,101 +313,116 @@
     transform: translateY(1px);
 }
 
-/* =========================
-   Exit
-   ========================= */
+/* =========================================================
+   EXIT BUTTON
+   ========================================================= */
 
 .navbar-exit-button {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     flex-shrink: 0;
 
     padding: 0;
 
-    border: none;
+    border: 1px solid rgba(255, 107, 107, 0.18);
     border-radius: 50%;
 
-    background: rgba(255, 107, 107, 0.18);
-    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 107, 107, 0.11);
+
+    color: rgba(255, 255, 255, 0.85);
 
     font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 400;
     line-height: 1;
 
     cursor: pointer;
 
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
     transition:
-        background 0.2s ease,
         transform 0.15s ease,
-        color 0.2s ease;
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .navbar-exit-button:hover {
-    background: rgba(255, 107, 107, 0.35);
+    background: rgba(255, 75, 75, 0.30);
+
+    border-color: rgba(255, 107, 107, 0.35);
+
     color: white;
-    transform: translateY(-1px);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(0, 0, 0, 0.25),
+        0 0 14px rgba(255, 80, 80, 0.14);
 }
 
 .navbar-exit-button:active {
     transform: translateY(1px);
 }
 
-/* =========================
-   Page Offset
-   ========================= */
+/* =========================================================
+   PAGE OFFSET
+   ========================================================= */
 
 .home-page {
-    padding-top: 90px;
+    padding-top: 84px;
 }
 
-/* =========================
-   Mobile
-   ========================= */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 600px) {
     .navbar {
-        padding: 10px 12px 0;
+        padding: 8px 10px 0;
     }
 
     .navbar-inner {
-        min-height: 54px;
-        padding: 6px 6px 6px 10px;
-        border-radius: 14px;
+        min-height: 52px;
+
+        padding: 5px 6px 5px 7px;
+
+        border-radius: 15px;
     }
 
     .navbar-logo {
-        width: 34px;
-        height: 34px;
-        font-size: 18px;
-    }
+        width: 38px;
+        height: 38px;
 
-    .navbar-title {
-        font-size: 14px;
+        border-radius: 10px;
     }
 
     .navbar-actions {
-        gap: 6px;
+        gap: 5px;
     }
 
     .navbar-icon-button,
     .navbar-language-button,
     .navbar-exit-button,
     .logout-button {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
     }
 
     .player-badge {
-        height: 38px;
+        height: 36px;
+        padding: 2px 9px 2px 3px;
     }
 
     .player-avatar {
@@ -350,26 +431,23 @@
     }
 
     .home-page {
-        padding-top: 74px;
+        padding-top: 68px;
     }
 }
 
-/* =========================
-   Small Mobile
-   ========================= */
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
 
 @media (max-width: 420px) {
-    .navbar-title {
-        display: none;
-    }
-
     .player-name {
         display: none;
     }
 
     .player-badge {
-        width: 38px;
+        width: 36px;
         padding: 3px;
+
         justify-content: center;
     }
 }

@@ -110,27 +110,32 @@
 /* Icon */
 
 .login-modal-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 20px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 64px;
-    height: 64px;
+    color: #dbeafe;
 
-    margin: 0 auto 16px;
+    background:
+        linear-gradient(145deg,
+            rgba(72, 125, 190, 0.32),
+            rgba(20, 48, 86, 0.55));
 
-    border-radius: 18px;
-
-    background: rgba(255, 255, 255, 0.1);
-
-    border: 2px solid rgba(255, 255, 255, 0.15);
-
-    font-size: 32px;
+    border: 1px solid rgba(148, 197, 255, 0.22);
+    border-radius: 50%;
 
     box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.25);
-}
+        0 10px 30px rgba(0, 0, 0, 0.28),
+        0 0 25px rgba(72, 125, 190, 0.16),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
 
 /* Title */
 
