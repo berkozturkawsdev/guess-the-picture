@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useLanguage } from "../context/LanguageContext";
 import { getCopy } from "../data/copy";
 import "./GoogleLoginButton.css";
-import { CircleUserRound, LogIn, Sparkles } from "lucide-react";
+import { LogIn, Sparkles } from "lucide-react";
 
 export default function GoogleLoginButton() {
     const [isOpen, setIsOpen] = useState(false);
