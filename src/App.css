@@ -59,9 +59,7 @@ body {
   justify-content: center;
 
   padding:
-    env(safe-area-inset-top)
-    16px
-    env(safe-area-inset-bottom);
+    env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
 
   gap: clamp(8px, 1.6vh, 16px);
 
@@ -70,16 +68,14 @@ body {
   background-color: var(--bg);
 
   background-image:
-    radial-gradient(
-      circle at top,
+    radial-gradient(circle at top,
       #1e3a8a,
-      var(--bg) 45%
-    );
+      var(--bg) 45%);
 
   background-attachment: fixed;
 }
 
-.game-container > * {
+.game-container>* {
   width: min(100%, 520px);
   max-width: 100%;
   flex-shrink: 1;
@@ -149,8 +145,6 @@ body {
   flex-direction: column;
   align-items: center;
 
-  padding:
-    80px 24px 40px;
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -158,73 +152,10 @@ body {
   background-color: var(--bg);
 
   background-image:
-    radial-gradient(
-      circle at top,
+    radial-gradient(circle at top,
       #1e3a8a,
-      var(--bg) 45%
-    );
+      var(--bg) 45%);
 }
-
-
-/* =========================================
-   TOP ACTIONS
-========================================= */
-
-.top-actions {
-  position: absolute;
-
-  top: max(16px, env(safe-area-inset-top));
-  right: max(16px, env(safe-area-inset-right));
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  gap: 10px;
-
-  width: auto;
-
-  z-index: 20;
-}
-
-.help-button,
-.settings-button {
-  width: 42px;
-  height: 42px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.16);
-
-  color: var(--text);
-
-  font-size: 1.15rem;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  backdrop-filter: blur(8px);
-
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.2);
-
-  transition:
-    background 0.2s ease,
-    transform 0.15s ease;
-}
-
-.help-button:hover,
-.settings-button:hover {
-  background: rgba(255, 255, 255, 0.24);
-
-  transform: translateY(-1px);
-}
-
 
 /* =========================================
    HERO
@@ -236,6 +167,7 @@ body {
   padding: 24px;
 
   color: var(--text);
+  margin-top: 120px;
 }
 
 .hero-content {
@@ -339,11 +271,9 @@ body {
   color: white;
 
   background:
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       #38bdf8,
-      #2563eb
-    );
+      #2563eb);
 
   cursor: pointer;
 
@@ -498,7 +428,7 @@ body {
   text-align: center;
 }
 
-.puzzle-set-card > span:last-child {
+.puzzle-set-card>span:last-child {
   font-size: 0.85rem;
 
   color: var(--muted);
@@ -533,11 +463,9 @@ body {
     1px solid rgba(255, 255, 255, 0.15);
 
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       #1e3a5f,
-      #071525
-    );
+      #071525);
 
   box-shadow:
     0 15px 35px rgba(0, 0, 0, 0.45),
@@ -612,11 +540,9 @@ body {
     2px solid #d6d6d6;
 
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       #ffffff,
-      #dcdcdc
-    );
+      #dcdcdc);
 
   color: #333;
 
@@ -730,11 +656,9 @@ body {
   border-radius: 24px;
 
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       #214f85,
-      #0f2547
-    );
+      #0f2547);
 
   border:
     2px solid rgba(255, 255, 255, 0.15);
@@ -795,11 +719,9 @@ body {
   color: white;
 
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       #42e695,
-      #18b84f
-    );
+      #18b84f);
 
   cursor: pointer;
 
@@ -846,6 +768,7 @@ body {
 }
 
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(0);
@@ -932,11 +855,9 @@ body {
   border-radius: 20px;
 
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       #214f85,
-      #0f2547
-    );
+      #0f2547);
 
   color: white;
 
@@ -1179,11 +1100,9 @@ body {
   border-radius: 24px;
 
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       #214f85,
-      #0f2547
-    );
+      #0f2547);
 
   border:
     2px solid rgba(255, 255, 255, 0.15);
@@ -1295,11 +1214,9 @@ body {
 
 .exit-confirm-button {
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       #ef4444,
-      #dc2626
-    );
+      #dc2626);
 
   color: white;
 
@@ -1329,16 +1246,14 @@ body {
     opacity: 0;
 
     transform:
-      scale(0.9)
-      translateY(10px);
+      scale(0.9) translateY(10px);
   }
 
   to {
     opacity: 1;
 
     transform:
-      scale(1)
-      translateY(0);
+      scale(1) translateY(0);
   }
 }
 
@@ -1431,8 +1346,6 @@ body {
 @media (max-width: 700px) {
 
   .landing-page {
-    padding:
-      70px 12px 30px;
 
     align-items: center;
 

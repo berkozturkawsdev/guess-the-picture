@@ -1,45 +1,28 @@
+import "./HomePage.css"
 import heroImage from "../assets/hero.webp";
 import type { Copy } from "../data/copy";
 import { puzzleSets } from "../data/puzzle-sets";
 import type { Language } from "../utils/getLanguage";
 import PuzzleSets from "./PuzzleSets";
-import SettingsModal from "./SettingsModal";
+import Navbar from "./Navbar";
 
 interface HomePageProps {
     language: Language;
     copy: Copy;
-    isSettingsOpen: boolean;
-    onOpenSettings: () => void;
-    onCloseSettings: () => void;
-    onLanguageChange: (language: Language) => void;
     onStartPuzzleSet: (setId: string) => void;
 }
 
 function HomePage({
     language,
     copy,
-    isSettingsOpen,
-    onOpenSettings,
-    onCloseSettings,
-    onLanguageChange,
     onStartPuzzleSet,
 }: HomePageProps) {
-
     return (
         <main className="landing-page">
 
-            {/* Top actions */}
-            <div className="top-actions">
-                <button
-                    className="settings-button"
-                    onClick={onOpenSettings}
-                    aria-label="Open settings"
-                    type="button"
-                >
-                    ⚙
-                </button>
-            </div>
-
+            <Navbar
+                copy={copy}
+            />
             {/* Hero */}
             <section className="hero-card">
                 <div className="hero-content">
@@ -85,15 +68,7 @@ function HomePage({
                 onSelect={onStartPuzzleSet}
             />
 
-            {/* Settings */}
-            {isSettingsOpen && <SettingsModal
-                isOpen={isSettingsOpen}
-                language={language}
-                copy={copy}
-                onClose={onCloseSettings}
-                onLanguageChange={onLanguageChange}
-            />
-            }
+
 
         </main>
     );

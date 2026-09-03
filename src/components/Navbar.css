@@ -1,0 +1,375 @@
+.auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* =========================
+   Player Badge
+   ========================= */
+
+.player-badge {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    height: 42px;
+    padding: 3px 12px 3px 4px;
+    box-sizing: border-box;
+
+    background: linear-gradient(145deg, #214f85, #0f2547);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+
+    color: white;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.player-avatar {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    background: #ffd43b;
+    color: #111;
+
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.player-name {
+    max-width: 130px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+/* =========================
+   Logout
+   ========================= */
+
+.logout-button {
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 0;
+
+    background: linear-gradient(145deg, #214f85, #0f2547);
+    color: rgba(255, 255, 255, 0.85);
+
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.logout-button:hover {
+    background: linear-gradient(145deg, #b83b4b, #7f2433);
+    color: white;
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.35);
+}
+
+.logout-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================
+   Navbar
+   ========================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    padding: 16px 20px 0;
+
+    box-sizing: border-box;
+
+    z-index: 1000;
+}
+
+.navbar-inner {
+    width: min(1100px, 100%);
+    min-height: 58px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    padding: 7px 8px 7px 14px;
+
+    background: linear-gradient(145deg, #214f85, #0f2547);
+
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 10px;
+    min-width: 0;
+}
+
+.navbar-logo {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    background: #ffd43b;
+    border-radius: 10px;
+
+    font-size: 20px;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-title {
+    color: white;
+
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: 0.2px;
+
+    white-space: nowrap;
+}
+
+/* =========================
+   Navbar Actions
+   ========================= */
+
+.navbar-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+
+    gap: 8px;
+}
+
+/* =========================
+   Help / Settings / Language
+   ========================= */
+
+.navbar-icon-button,
+.navbar-language-button {
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.16);
+    color: white;
+
+    font-family: inherit;
+    font-size: 1.15rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+.navbar-icon-button:hover,
+.navbar-language-button:hover {
+    background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-1px);
+}
+
+.navbar-icon-button:active,
+.navbar-language-button:active {
+    transform: translateY(1px);
+}
+
+/* =========================
+   Exit
+   ========================= */
+
+.navbar-exit-button {
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 107, 107, 0.18);
+    color: rgba(255, 255, 255, 0.9);
+
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        color 0.2s ease;
+}
+
+.navbar-exit-button:hover {
+    background: rgba(255, 107, 107, 0.35);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.navbar-exit-button:active {
+    transform: translateY(1px);
+}
+
+/* =========================
+   Page Offset
+   ========================= */
+
+.home-page {
+    padding-top: 90px;
+}
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 10px 12px 0;
+    }
+
+    .navbar-inner {
+        min-height: 54px;
+        padding: 6px 6px 6px 10px;
+        border-radius: 14px;
+    }
+
+    .navbar-logo {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+    }
+
+    .navbar-title {
+        font-size: 14px;
+    }
+
+    .navbar-actions {
+        gap: 6px;
+    }
+
+    .navbar-icon-button,
+    .navbar-language-button,
+    .navbar-exit-button,
+    .logout-button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .player-badge {
+        height: 38px;
+    }
+
+    .player-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .home-page {
+        padding-top: 74px;
+    }
+}
+
+/* =========================
+   Small Mobile
+   ========================= */
+
+@media (max-width: 420px) {
+    .navbar-title {
+        display: none;
+    }
+
+    .player-name {
+        display: none;
+    }
+
+    .player-badge {
+        width: 38px;
+        padding: 3px;
+        justify-content: center;
+    }
+}

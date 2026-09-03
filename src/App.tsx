@@ -10,21 +10,19 @@ import levels from "./data/levels.json";
 import WinModal from './WinModal';
 
 import { shuffleLevels } from "./utils/levelManager";
-import { getLanguage, setLanguage, type Language } from './utils/getLanguage';
 import { trackEvent } from './utils/analytics';
 import playWinSound from './utils/playWinSound';
 import { getCopy } from './data/copy';
 
 import HomePage from './components/HomePage';
-import ExitModal from './components/ExitModal';
-import HelpModal from './components/HelpModal';
-import SettingsModal from './components/SettingsModal';
 import SetCompletedModal from './components/SetCompletedModal';
 
 import { usePuzzleGame } from './hooks/usePuzzleGame';
 import { usePuzzleImages } from './hooks/usePuzzleImages';
 
 import { puzzleSets } from './data/puzzle-sets';
+import Navbar from './components/Navbar';
+import { useLanguage } from './context/LanguageContext';
 
 
 function App() {
@@ -37,8 +35,7 @@ function App() {
   const [currentLevel, setCurrentLevel] =
     useState(initialLevels[0]);
 
-  const [language, setLanguageState] =
-    useState<Language>(() => getLanguage());
+  const { language } = useLanguage();
 
   const copy = getCopy(language);
 
@@ -54,21 +51,6 @@ function App() {
 
   const [showSetCompleted, setShowSetCompleted] =
     useState(false);
-
-
-  // ================================
-  // OTHER UI STATE
-  // ================================
-
-  const [isHelpOpen, setIsHelpOpen] =
-    useState(false);
-
-  const [isSettingsOpen, setIsSettingsOpen] =
-    useState(false);
-
-  const [isExitModalOpen, setIsExitModalOpen] =
-    useState(false);
-
 
   // ================================
   // GAME HOOK
@@ -233,14 +215,6 @@ function App() {
   ]);
 
 
-  // ================================
-  // LANGUAGE
-  // ================================
-
-  useEffect(() => {
-    setLanguage(language);
-  }, [language]);
-
 
   // ================================
   // WIN SOUND
@@ -269,19 +243,6 @@ function App() {
       <HomePage
         language={language}
         copy={copy}
-
-        isSettingsOpen={isSettingsOpen}
-
-        onOpenSettings={() =>
-          setIsSettingsOpen(true)
-        }
-
-        onCloseSettings={() =>
-          setIsSettingsOpen(false)
-        }
-
-        onLanguageChange={setLanguageState}
-
         onStartPuzzleSet={startPuzzleSet}
       />
     );
@@ -295,7 +256,7 @@ function App() {
   return (
     <main className="game-container">
 
-      <div className="top-actions">
+      {/* <div className="top-actions">
 
         <button
           className="settings-button"
@@ -330,7 +291,18 @@ function App() {
           ?
         </button>
 
-      </div>
+      </div> */}
+
+
+      <Navbar
+        copy={copy}
+        onExitConfirm={() => {
+          setHasStarted(false);
+          setSelectedPuzzleSet(null);
+          setCurrentSetIndex(0);
+          setShowSetCompleted(false);
+        }}
+      />
 
 
       {/* ================================
@@ -392,73 +364,6 @@ function App() {
       />
 
 
-      {/* ================================
-          HELP
-      ================================= */}
-
-      {isHelpOpen && (
-
-        <HelpModal
-          isOpen={isHelpOpen}
-          copy={copy.help}
-          onClose={() =>
-            setIsHelpOpen(false)
-          }
-        />
-
-      )}
-
-
-      {/* ================================
-          SETTINGS
-      ================================= */}
-
-      {isSettingsOpen && (
-
-        <SettingsModal
-          isOpen={isSettingsOpen}
-          language={language}
-          copy={copy}
-
-          onClose={() =>
-            setIsSettingsOpen(false)
-          }
-
-          onLanguageChange={setLanguageState}
-        />
-
-      )}
-
-
-      {/* ================================
-          EXIT
-      ================================= */}
-
-      {isExitModalOpen && (
-
-        <ExitModal
-          isOpen={isExitModalOpen}
-          copy={copy.exitModal}
-
-          onClose={() =>
-            setIsExitModalOpen(false)
-          }
-
-          onConfirm={() => {
-
-            setIsExitModalOpen(false);
-
-            setHasStarted(false);
-
-            setSelectedPuzzleSet(null);
-
-            setCurrentSetIndex(0);
-
-            setShowSetCompleted(false);
-          }}
-        />
-
-      )}
 
 
       {/* ================================

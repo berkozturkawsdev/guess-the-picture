@@ -1,5 +1,5 @@
 import ReactCountryFlag from "react-country-flag";
-import type { Language } from "../utils/getLanguage";
+import { useLanguage } from "../context/LanguageContext";
 
 interface SettingsCopy {
     settingsTitle: string;
@@ -10,19 +10,17 @@ interface SettingsCopy {
 
 interface SettingsModalProps {
     isOpen: boolean;
-    language: Language;
     copy: SettingsCopy;
     onClose: () => void;
-    onLanguageChange: (language: Language) => void;
 }
 
 function SettingsModal({
     isOpen,
-    language,
     copy,
     onClose,
-    onLanguageChange,
 }: SettingsModalProps) {
+    const { language, setLanguage } = useLanguage();
+
     if (!isOpen) {
         return null;
     }
@@ -57,7 +55,7 @@ function SettingsModal({
                             }`}
                         type="button"
                         onClick={() => {
-                            onLanguageChange("en");
+                            setLanguage("en");
                             onClose();
                         }}
                     >
@@ -76,7 +74,7 @@ function SettingsModal({
                             }`}
                         type="button"
                         onClick={() => {
-                            onLanguageChange("tr");
+                            setLanguage("tr");
                             onClose();
                         }}
                     >
